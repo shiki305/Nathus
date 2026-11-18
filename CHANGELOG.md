@@ -1,5 +1,12 @@
     # CHANGELOG
 
+## 2026-11-17 - Raiz do repositorio limpa
+
+- `cadastro-direita-original.png` (1,21 MB) e `design-ontology.json` (4 KB) saíram do
+  versionamento: nenhum dos dois é usado pelo aplicativo (a tela de login usa
+  `Projeto/assets/cadastro-direita.png`). Os arquivos continuam no disco, agora listados no
+  `.gitignore`, então não voltam para o repositório sozinhos.
+
 ## 2026-11-17 - Pasta do app renomeada para Projeto e README na raiz
 
 - A pasta do aplicativo passou de `Editando` para `Projeto` (mesmo conteúdo, mesmo

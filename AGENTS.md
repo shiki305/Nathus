@@ -89,7 +89,8 @@ Tests/perfil-campos.php   Integração local com buffet1 demo; testa campos/espe
 Tests/pacote-foto-perfil.php Criação de pacote e limpeza após redirecionamento; casos canonical,
                           legado e ausente, incluindo resolução do avatar; usa transação revertida
 design-ontology.json      Ontologia de design (schema design-ontology@0.1.0) usada pelo MCP
-                          design-ontology; liga intenção do cliente a propriedades visuais
+                          design-ontology; liga intenção do cliente a propriedades visuais.
+                          Arquivo LOCAL: fica no disco mas não é versionado (ver .gitignore)
 .agents/skills/           Skills do agente (Matt Pocock) — carregadas pelo FreeBuff; 38 skills,
                           cópia de ~/.agents/skills (atualize com npx skills update + recopiar)
 uploads/                  Arquivos enviados (banner, buffet, galeria, org, pacotes, perfil-cliente,
@@ -98,7 +99,9 @@ _antigo/                  Versões antigas — NÃO usar como referência
 ```
 
 > Os `.md` de memória ficam **na raiz** `C:\xampp\htdocs\Nathus\`; o código fica na subpasta do app.
-> Não é repositório git (sem `git status`/commits).
+> A raiz **é** repositório git (branch `main`, remoto `shiki305/Nathus`), e os `.md` são versionados.
+> Ficam **fora** do versionamento: `Atual/`, `debug.log`, `cadastro-direita-original.png`,
+> `design-ontology.json` e as imagens de `Projeto/uploads/` que não sejam as das contas demo.
 
 ## Componentes Compartilhados
 

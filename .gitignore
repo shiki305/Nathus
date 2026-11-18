@@ -43,6 +43,10 @@ Projeto/setup.log
 .agents/
 .freebuff/
 
+# Arquivos que ficam so na maquina (nao fazem parte do app)
+cadastro-direita-original.png
+design-ontology.json
+
 # Sistema operacional / editores
 Thumbs.db
 desktop.ini
