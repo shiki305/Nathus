@@ -1,0 +1,92 @@
+.conteudo-pix {
+  width: min(680px, 100%);
+  text-align: center;
+}
+
+.painel-pix {
+  display: grid;
+  gap: 32px;
+  width: min(500px, 100%);
+  margin-inline: auto;
+}
+
+.qr-caixa {
+  width: min(232px, 100%);
+  margin-inline: auto;
+  padding: 12px;
+  border: 6px solid var(--ft02-amarelo);
+  border-radius: 12px;
+  background: var(--branco);
+}
+
+.qr-caixa img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.codigo-pix {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+}
+
+.codigo-pix label {
+  font-size: 14px;
+  color: var(--texto-escuro);
+  text-align: center;
+}
+
+.codigo-pix textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: var(--nathus-roxo-claro);
+  color: var(--texto-escuro);
+  font: inherit;
+  font-size: 13px;
+  resize: none;
+  overflow-wrap: anywhere;
+}
+
+.codigo-pix button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  height: auto;
+  margin: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--nathus-roxo);
+  border-radius: 8px;
+  background: var(--branco);
+  color: var(--botao);
+  font-size: 14px;
+}
+
+.codigo-pix button:hover {
+  background: var(--nathus-roxo-claro);
+  transform: none;
+}
+
+.codigo-pix button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.btn-continuar-pix {
+  width: min(320px, 100%);
+  margin-top: 24px;
+}
+
+@supports (field-sizing: content) {
+  .codigo-pix textarea {
+    field-sizing: content;
+  }
+}

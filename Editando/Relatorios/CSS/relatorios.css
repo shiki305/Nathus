@@ -1,0 +1,208 @@
+.rel-pagina {
+    padding: 28px clamp(16px, 2.5vw, 36px) 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 1480px;
+    margin-inline: auto;
+    box-sizing: border-box;
+}
+
+.rel-pdf {
+    display: inline-flex;
+    align-self: center;
+    align-items: center;
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 8px;
+    background: var(--nathus-dourado);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.rel-pdf:hover {
+    background: var(--nathus-dourado);
+    color: #fff;
+    filter: brightness(0.97);
+}
+
+.rel-ano {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.rel-ano label {
+    color: #6e6580;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.rel-ano select {
+    height: 38px;
+    min-width: 110px;
+    border: 1px solid #e4dced;
+    border-radius: 8px;
+    background: #fff;
+    color: #24132d;
+    font: inherit;
+    font-weight: 600;
+    padding: 0 12px;
+}
+
+.rel-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+}
+
+.rel-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+}
+
+.rel-card span {
+    display: block;
+    color: #6e6580;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.rel-card strong {
+    font-size: 26px;
+    font-weight: 700;
+    color: #24132d;
+    line-height: 1;
+}
+
+.rel-painel {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 22px 18px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+}
+
+.rel-cabecalho h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #3a3144;
+}
+
+.rel-cabecalho p {
+    margin: 4px 0 0;
+    color: #786a82;
+    font-size: 13px;
+}
+
+.rel-vazio {
+    margin: 18px 0 4px;
+    color: #786a82;
+}
+
+.rel-grafico {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+    height: 160px;
+    align-items: end;
+    margin-top: 22px;
+}
+
+.rel-coluna {
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.rel-barra {
+    width: 100%;
+    border-radius: 8px 8px 3px 3px;
+    background: var(--ft02-amarelo);
+    min-height: 0;
+}
+
+.rel-meses {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.rel-meses span {
+    text-align: center;
+    font-size: 12px;
+    color: #8a7d96;
+}
+
+.rel-tabela-wrap {
+    overflow-x: auto;
+    margin-top: 16px;
+}
+
+.rel-tabela {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rel-tabela th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: #8a7d96;
+    padding: 0 12px 12px 0;
+}
+
+.rel-tabela td {
+    padding: 12px 12px 12px 0;
+    border-top: 1px solid #f0ebf4;
+    color: #3a3144;
+    font-size: 14px;
+}
+
+.rel-rotulo--evento { --icone-label: url("../../assets/eventos_marcado_dashboard.svg"); }
+.rel-rotulo--status { --icone-label: url("../../assets/check_dashboard.svg"); }
+
+.rel-tabela .rel-rotulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.rel-tabela .rel-rotulo::before {
+    content: "";
+    flex: 0 0 14px;
+    height: 14px;
+    background: var(--ft02-roxo-intermediario);
+    mask: var(--icone-label) center / contain no-repeat;
+}
+
+.rel-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.rel-status--pendente { background: #fff4d8; color: #8a6200; }
+.rel-status--aceita,
+.rel-status--concluida { background: #e5f7ee; color: #1d7a45; }
+.rel-status--recusada { background: #fde8e8; color: #a12626; }
+.rel-status--cancelada { background: #f1eef4; color: #6d6478; }
+
+@media (max-width: 780px) {
+    .rel-pagina { padding: 16px; }
+    .rel-cards { grid-template-columns: 1fr 1fr; }
+    .rel-meses span { font-size: 10px; }
+}

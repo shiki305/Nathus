@@ -1,0 +1,151 @@
+/* Específico da etapa 1 — formulário de informações */
+
+.conteudo-formulario {
+  width: min(var(--cadastro-largura-form), 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#direita h1 {
+  text-align: center;
+  font-size: clamp(30px, 2.2vw, 36px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--preto);
+}
+
+.barra {
+  width: 100%;
+  height: 2px;
+  margin: 16px 0;
+  background: var(--barra);
+}
+
+.erro-cadastro {
+  width: 100%;
+  margin: -12px 0 18px;
+  color: #b00020;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+form {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.campo {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.linha-formulario {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+form label {
+  margin: 0 0 5px 4px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.1;
+  color: var(--cadastro-rotulo);
+}
+
+form input {
+  width: 100%;
+  height: 48px;
+  border-radius: var(--cadastro-raio-campo);
+  padding: 0 14px;
+  outline: none;
+  font-size: 15px;
+  font-family: var(--f1);
+  color: var(--preto);
+  background-color: var(--cadastro-fundo-campo);
+}
+
+form input::placeholder {
+  color: var(--cadastro-placeholder);
+  opacity: 1;
+}
+
+form input:focus {
+  box-shadow: 0 0 0 2px var(--focus-sombra);
+}
+
+.titulo-extra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#direita h2 {
+  font-family: var(--f1);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--preto);
+}
+
+.barra2 {
+  width: 382px;
+  max-width: 75%;
+  height: 2px;
+  background: var(--barra);
+}
+
+form button {
+  width: 280px;
+  height: 48px;
+  justify-self: center;
+  border-radius: 10px;
+  background-color: var(--botao);
+  color: var(--branco);
+  font-family: var(--f1);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .3px;
+  cursor: pointer;
+  transition: background .15s ease, transform .15s ease;
+}
+
+form button:hover {
+  background-color: var(--botao-hover);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .sair {
+    top: 18px;
+    left: 18px;
+  }
+
+  #direita h1 {
+    font-size: 31px;
+  }
+}
+
+@media (max-width: 560px) {
+  .linha-formulario {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .botao-login,
+  form button {
+    width: 100%;
+  }
+
+  #direita h1 {
+    font-size: 27px;
+  }
+}

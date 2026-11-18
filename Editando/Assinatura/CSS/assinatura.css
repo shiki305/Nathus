@@ -1,0 +1,250 @@
+@charset "UTF-8";
+
+.assinatura-pagina {
+    --assinatura-grafite: #202026;
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 24px clamp(16px, 2.5vw, 36px) 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-family: "Poppins", sans-serif;
+    color: var(--texto-escuro);
+}
+
+.assinatura-pagina h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--assinatura-grafite);
+}
+
+.aviso-ok {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.resumo-assinatura,
+.dados-plano,
+.plano-cartao {
+    background: var(--branco);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(32, 24, 73, 0.05);
+}
+
+.resumo-assinatura h2 {
+    margin-bottom: 16px;
+}
+
+.resumo-conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.resumo-pessoa {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.resumo-foto {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #eceaf2;
+    flex-shrink: 0;
+}
+
+.resumo-foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.resumo-foto.vazia img {
+    width: 55%;
+    height: 55%;
+    margin: 22.5%;
+    object-fit: contain;
+}
+
+.resumo-pessoa strong {
+    display: block;
+    font-size: 18px;
+}
+
+.resumo-pessoa span {
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+.resumo-dados {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+}
+
+.dado small {
+    display: block;
+    font-size: 11px;
+    color: var(--texto-suave);
+    margin-bottom: 4px;
+}
+
+.dado strong {
+    font-size: 15px;
+}
+
+.status-ativo {
+    color: #17803d;
+}
+
+.status-inativo {
+    color: #b45309;
+}
+
+.grade-planos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.plano-cartao {
+    border: 1px solid var(--borda);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.plano-cartao.atual {
+    border-color: #cfc4e3;
+}
+
+.plano-cabecalho {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.selo-atual {
+    background: var(--nathus-roxo-claro);
+    color: var(--ft02-roxo-intermediario);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 8px;
+}
+
+.plano-desc {
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+.plano-preco {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.plano-preco span,
+.plano-preco small {
+    font-size: 14px;
+    color: var(--texto-suave);
+}
+
+.plano-preco strong {
+    font-size: 42px;
+    line-height: 1;
+    color: var(--assinatura-grafite);
+}
+
+.plano-cartao ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.plano-cartao li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.plano-cartao li img {
+    width: 16px;
+    height: 16px;
+}
+
+.plano-cartao form {
+    margin-top: auto;
+}
+
+.botao-plano {
+    width: 100%;
+    min-height: 44px;
+    border: 0;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    background: var(--ft02-dourado-acao);
+    color: var(--branco);
+}
+
+.botao-plano:hover {
+    background: color-mix(in srgb, var(--ft02-dourado-acao) 90%, #24132d);
+}
+
+.botao-plano:focus-visible {
+    outline: 2px solid var(--ft02-roxo-intermediario);
+    outline-offset: 2px;
+}
+
+.dados-plano h2 {
+    margin-bottom: 8px;
+}
+
+.dados-plano p {
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+@media (max-width: 900px) {
+    .assinatura-pagina {
+        padding: 24px 16px 40px;
+    }
+
+    .resumo-conteudo {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .grade-planos {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .resumo-assinatura,
+    .dados-plano,
+    .plano-cartao {
+        padding: 16px;
+    }
+}

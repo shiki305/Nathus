@@ -1,0 +1,323 @@
+@charset "UTF-8";
+
+/* ============================================================
+   Fontes + reset + variáveis — carregado por TODAS as páginas.
+   ============================================================ */
+
+@font-face {
+    font-family: "Poppins";
+    src: url(../../Fontes/Poppins/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(../../Fontes/Poppins/Poppins-Light.ttf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(../../Fontes/Poppins/Poppins-Medium.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(../../Fontes/Poppins/Poppins-SemiBold.ttf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(../../Fontes/Poppins/Poppins-Bold.ttf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(../../Fontes/Poppins/Poppins-ExtraBold.ttf);
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url(../../Fontes/Nunito/Nunito-Regular.ttf);
+    font-weight: 200 1000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+/* overflow-x: hidden no body cria um scroll container em body, o que quebra
+   position: sticky do sidebar (.barra-lateral). overflow: clip recorta sem virar
+   scroll container; o fallback hidden fica só no html para engines antigas. */
+html {
+    overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+    html, body {
+        overflow-x: clip;
+    }
+}
+
+:root {
+    --ft02-roxo-escuro: #2b0058;
+    --ft02-roxo-intermediario: #49008b;
+    --ft02-roxo: #6500bd;
+    --ft02-amarelo: #f5b600;
+    --ft02-dourado-acao: #f5b600;
+
+    /* Paleta do app (sidebar, dashboard, perfil...) */
+    --branco: #ffffff;
+    --preto: #000000;
+    --fundo-pagina: #f4f2fa;
+    --borda: #ece9f6;
+    --texto-escuro: #201849;
+    --texto-suave: #8b86a3;
+    --menu-perfil-texto: #4b447a;
+    --texto-link: var(--menu-perfil-texto);
+    --texto-sidebar: rgba(255, 255, 255, .96);
+    --hover-sidebar: rgba(255, 255, 255, .08);
+    --notificacao: #ff5a5a;
+    --logout-fundo: rgba(255, 90, 90, 0.12);
+    --logout-texto: #ffb3b3;
+    --sombra-menu: rgba(32, 24, 73, 0.12);
+    --nathus-roxo-escuro: #2a1e50;
+    --nathus-roxo-ativo: #7c70a0;
+    --menu-perfil-foco: #6d5fd3;
+    --nathus-roxo: var(--menu-perfil-foco);
+    --nathus-roxo-claro: #f3effc;
+    --nathus-dourado: #d5a20a;
+    --nathus-azul: #4a90d9;
+    --nathus-teal: #5b95a3;
+
+    /* Base das páginas home (organizadores / buffet / espaco) —
+       usadas por org.css, buffet.css e style.css. Ficam aqui porque
+       global.css é carregado por todas as páginas. */
+    --roxo: #2c1d57;
+    --suave: #666;
+    --muted: #666;
+    --texto: #191919;
+
+    /* Paleta de cadastro/login (roxo profundo) */
+    --cor-principal: #43007D;
+    --roxo-transparente: rgba(203, 188, 216, 0.45);
+    --roxo-sombra: rgba(71, 1, 132, 0.22);
+    --roxo-sombra-forte: rgba(71, 1, 132, 0.28);
+    --cinza: #7C838A;
+    --cinza-escuro: #696F79;
+    --cinza-card: #777777;
+    --botao: #470184;
+    --botao-hover: #2d0054;
+    --barra: #D9D2E3;
+    --fundo: #fbfcfd;
+    --escuro-foto: rgba(6, 10, 25, 0.38);
+    --placeholder: rgba(105, 111, 121, 0.72);
+    --focus-sombra: rgba(71, 1, 132, 0.22);
+    --f1: "Poppins", sans-serif;
+    --f2: "Poppins", sans-serif;
+
+    /* Padronização adicional — prefixos pt-BR */
+    --bg-page: var(--fundo-pagina);
+    --bg-card: var(--branco);
+    --border-color: var(--borda);
+    --text-primary: var(--texto-escuro);
+    --text-muted: var(--texto-suave);
+    --text-link: var(--texto-link);
+    --primary: var(--nathus-roxo);
+    --primary-dark: var(--nathus-roxo-escuro);
+    --primary-light: var(--nathus-roxo-claro);
+    --gold: var(--nathus-dourado);
+    --blue: var(--nathus-azul);
+    --teal: var(--nathus-teal);
+    --error: #e74c3c;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-lg: 0 12px 24px rgba(32, 24, 73, 0.12);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 999px;
+    --transition-fast: 0.1s;
+    --transition-base: 0.15s;
+    --transition-slow: 0.2s;
+    --font-sans: var(--f1);
+    --font-display: var(--f2);
+}
+
+.icone-especialidade {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    background-color: currentColor;
+    mask: var(--icone) center / contain no-repeat;
+}
+
+.icone-especialidade[data-icone="15_anos.png"] { --icone: url("../../assets/15_anos.png"); }
+.icone-especialidade[data-icone="casamento.png"] { --icone: url("../../assets/casamento.png"); }
+.icone-especialidade[data-icone="formatura.png"] { --icone: url("../../assets/formatura.png"); }
+.icone-especialidade[data-icone="aniversario.svg"] { --icone: url("../../assets/aniversario.svg"); }
+.icone-especialidade[data-icone="corporativo.svg"] { --icone: url("../../assets/corporativo.svg"); }
+
+/* Conta compartilhada: referência visual do dashboard do promotor. */
+.conta-perfil { position: relative; min-width: 0; font-family: "Poppins", sans-serif; }
+.conta-perfil .botao-perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+}
+
+.conta-perfil .avatar-perfil,
+.avatar-cliente-card {
+    display: block;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--nathus-roxo-claro);
+    overflow: hidden;
+    outline: 1px solid var(--nathus-roxo-escuro);
+    outline-offset: 1px;
+    flex-shrink: 0;
+}
+
+.conta-perfil .avatar-perfil img,
+.avatar-cliente-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.conta-perfil .avatar-perfil.avatar-vazio,
+.avatar-cliente-card.avatar-vazio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eceaf2;
+}
+
+.conta-perfil .avatar-perfil.avatar-vazio img,
+.avatar-cliente-card.avatar-vazio img {
+    width: 55%;
+    height: 55%;
+    object-fit: contain;
+    filter: invert(62%) sepia(18%) saturate(540%) hue-rotate(210deg) brightness(92%);
+}
+
+.conta-perfil .texto-perfil {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.2;
+}
+
+.conta-perfil .texto-perfil strong {
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--texto-escuro);
+}
+
+.conta-perfil .texto-perfil small {
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--texto-suave);
+}
+
+.conta-perfil .caret-perfil {
+    width: 14px;
+    height: 14px;
+}
+
+.conta-perfil .menu-perfil {
+    display: none;
+    position: absolute;
+    top: 58px;
+    right: 0;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    box-shadow: 0 12px 24px var(--sombra-menu);
+    min-width: 160px;
+    overflow: hidden;
+    z-index: 20;
+}
+
+.conta-perfil .menu-perfil.aberto {
+    display: block;
+}
+
+.conta-perfil .menu-perfil a,
+.conta-perfil .menu-perfil button {
+    display: block;
+    width: 100%;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    padding: 10px 16px;
+    color: var(--menu-perfil-texto);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.conta-perfil .menu-perfil a:hover,
+.conta-perfil .menu-perfil button:hover {
+    background: var(--fundo-pagina);
+}
+
+
+.conta-perfil .botao-perfil { max-width: 100%; min-height: 46px; }
+.conta-perfil .texto-perfil { min-width: 0; }
+.conta-perfil .texto-perfil strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.conta-perfil .caret-perfil { flex-shrink: 0; }
+.conta-perfil .botao-perfil:focus-visible { outline: 2px solid var(--nathus-roxo); outline-offset: 4px; border-radius: 4px; }
+.conta-perfil .menu-perfil a:focus-visible,
+.conta-perfil .menu-perfil button:focus-visible { outline: 2px solid var(--menu-perfil-foco); outline-offset: -2px; }
+.conta-perfil--vitrine { max-width: 320px; }
+.conta-perfil--vitrine .texto-perfil strong { color: var(--branco); }
+.conta-perfil--vitrine .texto-perfil small { color: #cbc5df; }
+.conta-perfil--vitrine .caret-perfil { filter: brightness(0) invert(1); }
+.conta-perfil--vitrine .avatar-perfil { outline-color: #cbc5df; }
+.conta-perfil--vitrine .botao-perfil:focus-visible { outline-color: #fdbd24; }
+.conta-perfil--vitrine .menu-perfil {
+    top: calc(100% + 10px);
+    min-width: 196px;
+}
+.conta-perfil--vitrine.vt-perfil--aberto .menu-perfil { display: block; }
+
+/* Lista de itens dos cards de pacote: rola por dentro para nao esticar o card. */
+.pacote-itens {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.pacote-itens-lista {
+    max-height: 11rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: #b9b0d4 transparent;
+    padding-right: 4px;
+}
+
+.pacote-itens-lista:focus-visible {
+    outline: 2px solid var(--ft02-roxo-intermediario);
+    outline-offset: 2px;
+    border-radius: 4px;
+}

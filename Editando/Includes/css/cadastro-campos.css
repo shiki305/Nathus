@@ -1,0 +1,36 @@
+:root {
+    --cadastro-largura-form: 680px;
+    --cadastro-raio-campo: 8px;
+    --cadastro-fundo-campo: #e2e4e9;
+    --cadastro-rotulo: #302b3b;
+    --cadastro-placeholder: #575364;
+    --cadastro-amarelo-acao: #d5a20a;
+    --cadastro-amarelo-hover: #bc8e08;
+    --cadastro-amarelo-suave: #fff5d6;
+    --cadastro-amarelo-foco: #f5b600;
+    --cadastro-espessura-foco: 3px;
+}
+
+/* Campos comuns do cadastro. O :where() mantém a especificidade baixa para que
+   regras específicas (ex.: o conteúdo do número do cartão logo abaixo) possam
+   sobrepor o anel de foco. */
+.divisao #direita :where(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), textarea, select, [contenteditable="plaintext-only"]):focus,
+.divisao #direita .campo-cartao:focus-within {
+    outline: var(--cadastro-espessura-foco) solid var(--cadastro-amarelo-foco);
+    outline-offset: calc(-1 * var(--cadastro-espessura-foco));
+    box-shadow: none;
+}
+
+/* O conteúdo editável dentro do cartão (número do cartão) não desenha o próprio
+   anel: quem recebe o anel é o cartão inteiro, junto com o ícone. */
+.divisao #direita .campo-cartao .cartao-valor:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+@media (max-width: 900px) {
+    .divisao #direita {
+        padding-top: 80px;
+    }
+}
+

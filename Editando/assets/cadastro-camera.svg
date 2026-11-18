@@ -1,0 +1,6 @@
+<svg width="82" height="82" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Corpo da câmera com lente vazada (furo real via fill-rule evenodd) -->
+  <path fill-rule="evenodd" clip-rule="evenodd" fill="white" d="M31 17H51C52.2835 17 53.462 17.7672 53.9743 18.9441L57 26H67C71.9706 26 76 30.0294 76 35V55C76 59.9706 71.9706 64 67 64H15C10.0294 64 6 59.9706 6 55V35C6 30.0294 10.0294 26 15 26H25L28.0257 18.9441C28.538 17.7672 29.7165 17 31 17ZM41 31C33.8203 31 28 36.8203 28 44C28 51.1797 33.8203 57 41 57C48.1797 57 54 51.1797 54 44C54 36.8203 48.1797 31 41 31Z"/>
+  <!-- Aro da lente -->
+  <circle cx="41" cy="44" r="10" stroke="#CBC5F0" stroke-width="4.5"/>
+</svg>

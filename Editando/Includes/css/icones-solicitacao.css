@@ -1,0 +1,32 @@
+.label--data { --icone-label: url("../../assets/calendario_solicitacoes.svg"); }
+.label--horario { --icone-label: url("../../assets/relogio_solicitacoes.svg"); }
+.label--local { --icone-label: url("../../assets/local_perfilprom.svg"); }
+.label--convidados { --icone-label: url("../../assets/user_dashboard.svg"); }
+.label--mensagem { --icone-label: url("../../assets/mensagem_solicitacao.svg"); }
+
+.label--data,
+.label--horario,
+.label--local,
+.label--convidados,
+.label--mensagem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.label--data::before,
+.label--horario::before,
+.label--local::before,
+.label--convidados::before,
+.label--mensagem::before {
+    content: "";
+    flex: 0 0 14px;
+    height: 14px;
+    background: currentColor;
+    mask: var(--icone-label) center / contain no-repeat;
+}
+
+.label--convidados::before,
+.label--mensagem::before {
+    background-color: var(--ft02-roxo-intermediario);
+}

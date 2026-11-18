@@ -1,0 +1,264 @@
+@charset "UTF-8";
+
+.solicitacoes-pagina {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+    display: grid;
+    gap: 16px;
+    color: var(--texto-escuro);
+}
+
+.solicitacoes-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.solicitacoes-cabecalho h2 {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+@media (max-width: 760px) {
+    .solicitacoes-pagina {
+        padding: 20px 16px 34px;
+    }
+}
+
+.solicitacoes-contagem {
+    padding: 3px 10px;
+    border-radius: var(--raio-selo-notificacao);
+    background: var(--ft02-amarelo);
+    color: var(--nathus-roxo-escuro);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.lista-cards-solicitacao {
+    display: grid;
+    gap: 12px;
+}
+
+.card-pendencia,
+.solicitacoes-vazio {
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    background: var(--branco);
+    box-shadow: 0 1px 3px rgba(32, 24, 73, .05);
+    color: #24132d;
+}
+
+.solicitacoes-vazio {
+    padding: clamp(14px, 2vw, 20px);
+    color: #5d566c;
+    font-size: 14px;
+    text-align: center;
+}
+
+.card-pendencia {
+    --texto-secundario: #40394b;
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr) minmax(156px, auto);
+    align-items: start;
+    gap: 16px 24px;
+    padding: 16px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.card-pendencia-data {
+    display: grid;
+    align-self: center;
+    place-items: center;
+    min-height: 86px;
+    padding: 8px 4px;
+    border: 1px solid #ddd2f1;
+    border-radius: 8px;
+    background: #ece6fb;
+    color: var(--nathus-roxo-escuro);
+    text-align: center;
+}
+
+.card-pendencia-data strong,
+.card-pendencia-data small {
+    display: block;
+}
+
+.card-pendencia-data strong {
+    font-size: 23px;
+    line-height: 1.1;
+}
+
+.card-pendencia-data small {
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-pendencia-corpo h3 {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.card-pendencia-cliente,
+.card-pendencia-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.card-pendencia-cliente .avatar-cliente-card {
+    width: 24px;
+    height: 24px;
+}
+
+.card-pendencia-cliente .avatar-cliente-card img {
+    display: block;
+}
+
+.card-pendencia-meta {
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-top: 8px;
+    color: var(--texto-secundario);
+}
+
+.card-pendencia-meta > span {
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.card-pendencia-meta > span::before {
+    margin-top: 2px;
+    background-color: var(--ft02-roxo-intermediario);
+}
+
+.card-pendencia-mensagem {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    margin-top: 8px;
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.card-pendencia-mensagem strong {
+    display: inline-flex;
+    gap: 8px;
+    vertical-align: middle;
+    color: var(--ft02-roxo-intermediario);
+}
+
+.card-pendencia-acoes {
+    display: grid;
+    justify-items: end;
+    gap: 8px;
+    text-align: right;
+}
+
+.card-pendencia-valor span,
+.card-pendencia-valor strong {
+    display: block;
+}
+
+.card-pendencia-valor span,
+.card-pendencia-recebida {
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.card-pendencia-valor strong {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.card-pendencia-detalhes {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--ft02-dourado-acao);
+    color: var(--branco);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.card-pendencia-detalhes:hover {
+    background: color-mix(in srgb, var(--ft02-dourado-acao) 90%, #24132d);
+}
+
+.card-pendencia-detalhes:focus-visible {
+    outline: 2px solid var(--nathus-roxo);
+    outline-offset: 2px;
+}
+
+.card-pendencia-detalhes::after {
+    content: "";
+    flex: 0 0 8px;
+    height: 12px;
+    background: currentColor;
+    mask: url("../../assets/seta_solicitacoes.svg") center / contain no-repeat;
+}
+
+.card-pendencia--resumo {
+    padding-block: 12px;
+}
+
+.card-pendencia--resumo .card-pendencia-data {
+    min-height: 64px;
+}
+
+.card-pendencia--resumo .card-pendencia-data strong {
+    font-size: 19px;
+}
+
+@media (min-width: 761px) {
+    .card-pendencia--resumo {
+        grid-template-columns: 80px minmax(0, 1fr) minmax(136px, auto);
+    }
+}
+
+@media (min-width: 1200px) {
+    .card-pendencia {
+        column-gap: 32px;
+    }
+}
+
+@media (max-width: 760px) {
+    .card-pendencia {
+        grid-template-columns: 70px minmax(0, 1fr);
+        column-gap: 12px;
+    }
+
+    .card-pendencia-data {
+        min-height: 74px;
+    }
+
+    .card-pendencia-data strong {
+        font-size: 19px;
+    }
+
+    .card-pendencia-acoes {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 12px;
+        border-top: 1px solid var(--borda);
+        text-align: left;
+    }
+
+    .card-pendencia-recebida {
+        flex-basis: 100%;
+    }
+}

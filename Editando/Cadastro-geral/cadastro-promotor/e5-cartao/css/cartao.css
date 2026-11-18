@@ -1,0 +1,160 @@
+.conteudo-cartao {
+  width: min(var(--cadastro-largura-form), 100%);
+  text-align: center;
+}
+
+.conteudo-cartao .titulo hr {
+  max-width: none;
+}
+
+.form-cartao,
+.linha-formulario,
+.cartao-campo {
+  display: grid;
+  min-width: 0;
+}
+
+.form-cartao,
+.linha-formulario {
+  gap: 16px;
+}
+
+.form-cartao {
+  margin-top: 32px;
+  text-align: left;
+}
+
+.cartao-campo {
+  gap: 8px;
+}
+
+.rotulo-cartao {
+  color: var(--cadastro-rotulo);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.cartao-valor,
+.cartao-campo select {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 8px 16px;
+  border-radius: var(--cadastro-raio-campo);
+  background: var(--cadastro-fundo-campo);
+  color: var(--cadastro-rotulo);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  outline: none;
+}
+
+.cartao-valor {
+  line-height: 32px;
+  overflow: hidden;
+  white-space: pre;
+}
+
+.cartao-valor:empty::before {
+  content: attr(aria-placeholder);
+  color: var(--cadastro-placeholder);
+  pointer-events: none;
+}
+
+.cartao-campo select {
+  cursor: pointer;
+}
+
+.cartao-campo option {
+  background: var(--branco);
+  color: var(--cadastro-rotulo);
+}
+
+@supports (appearance: base-select) and selector(select::picker(select)) {
+  #modo-pagamento,
+  #modo-pagamento::picker(select) {
+    appearance: base-select;
+  }
+
+  #modo-pagamento {
+    align-items: center;
+  }
+
+  #modo-pagamento::picker-icon {
+    color: var(--cadastro-amarelo-acao);
+  }
+
+  #modo-pagamento::picker(select) {
+    margin-block: 4px;
+    padding: 4px;
+    background: var(--branco);
+    border: 1px solid var(--cadastro-amarelo-acao);
+    border-radius: var(--cadastro-raio-campo);
+    box-shadow: var(--shadow-md);
+  }
+
+  #modo-pagamento option {
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  #modo-pagamento option:is(:hover, :focus-visible, :checked) {
+    color: var(--cadastro-rotulo);
+    background: var(--cadastro-amarelo-suave);
+  }
+
+  #modo-pagamento option:focus-visible {
+    outline: var(--cadastro-espessura-foco) solid var(--cadastro-amarelo-foco);
+    outline-offset: calc(-1 * var(--cadastro-espessura-foco));
+  }
+
+  #modo-pagamento option::checkmark {
+    color: var(--cadastro-amarelo-acao);
+  }
+
+  #modo-pagamento option:checked {
+    font-weight: 700;
+  }
+}
+
+.campo-cartao {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  align-items: center;
+  padding-inline-start: 16px;
+  border-radius: var(--cadastro-raio-campo);
+  background: var(--cadastro-fundo-campo);
+}
+
+.campo-cartao .cartao-valor {
+  background: transparent;
+}
+
+.campo-cartao img {
+  width: 24px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.linha-formulario {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.btn-finalizar-cartao {
+  width: min(320px, 100%);
+  margin-top: 24px;
+  background: var(--cadastro-amarelo-acao);
+  color: #fff;
+}
+
+.btn-finalizar-cartao:hover {
+  background: var(--cadastro-amarelo-hover);
+}
+
+@media (max-width: 360px) {
+  .linha-formulario {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,121 @@
+/* Específico da etapa 2 — escolha cliente x promotor */
+
+button {
+  margin-top: 36px;
+}
+
+.conteudo-escolha {
+  width: min(720px, 100%);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.linha-cartoes {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.opcao-input {
+  display: none;
+}
+
+.cartao {
+  width: min(300px, 100%);
+  min-height: 380px;
+  padding: 40px 22px 28px;
+  border-radius: 20px;
+  background-color: var(--branco);
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+  color: var(--cinza);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform .15s ease, box-shadow .15s ease, border .15s ease;
+}
+
+.cartao:hover {
+  transform: translateY(-4px);
+  border: 2px solid var(--cor-principal);
+  box-shadow: 0 8px 18px var(--roxo-sombra-forte);
+}
+
+.opcao-input:checked + .cartao {
+  border: 5px solid var(--cor-principal);
+  background-color: var(--branco);
+  box-shadow: 0 8px 18px var(--roxo-sombra-forte);
+  transform: translateY(-4px);
+}
+
+.opcao-input:checked + .cartao h2 {
+  color: var(--cor-principal);
+}
+
+.cartao img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  opacity: .75;
+}
+
+.cartao .icone-cliente {
+  filter: grayscale(1);
+}
+
+/* Variante roxa (#43007D) do icone: so aparece com o card selecionado.
+   filter: none anula o grayscale do .icone-cliente padrao;
+   opacity: 1 anula a transparencia do .cartao img padrao. */
+.cartao .icone-roxo {
+  display: none;
+  filter: none;
+  opacity: 1;
+}
+
+.opcao-input:checked + .cartao .icone-roxo {
+  display: block;
+}
+
+.opcao-input:checked + .cartao img:not(.icone-roxo) {
+  display: none;
+}
+
+.cartao h2 {
+  margin-top: 28px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #373737;
+}
+
+.cartao p {
+  margin-top: 18px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: #373737;
+}
+
+@media (max-width: 700px) {
+  .linha-cartoes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cartao {
+    width: 100%;
+    max-width: 330px;
+    min-height: auto;
+  }
+
+  button {
+    width: 100%;
+    max-width: 330px;
+  }
+}

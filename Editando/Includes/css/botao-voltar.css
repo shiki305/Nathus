@@ -1,0 +1,41 @@
+.botao-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 14px;
+    width: fit-content;
+    flex: 0 0 auto;
+    border: 1px solid rgba(71, 1, 132, .25);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--cor-principal);
+    background: linear-gradient(var(--cor-principal), var(--cor-principal)) no-repeat left center;
+    background-size: 0% 100%;
+    transition: background-size .18s ease, color .18s ease;
+}
+
+.botao-voltar::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background: currentColor;
+    mask: url("../../assets/cadastro-voltar.svg") center / contain no-repeat;
+}
+
+.botao-voltar:is(:hover, :focus-visible) {
+    color: #fff;
+    background-size: 100% 100%;
+}
+
+.botao-voltar:focus-visible {
+    outline: 2px solid var(--cor-principal);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .botao-voltar {
+        transition: none;
+    }
+}

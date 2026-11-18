@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+body {
+    background: #f4f1fa;
+    color: #201849;
+    font-family: "Poppins", Arial, sans-serif;
+}
+
+.conta {
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px 80px;
+}
+
+.conta-cartao {
+    background: #fff;
+    border: 1px solid #ece7f5;
+    border-radius: 20px;
+    box-shadow: 0 12px 32px rgba(44, 29, 87, 0.08);
+    max-width: 640px;
+    padding: 32px 32px 28px;
+    width: 100%;
+}
+
+.conta-cartao h1 {
+    color: #201849;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0;
+}
+
+.conta-intro {
+    color: #7a7494;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 8px 0 22px;
+}
+
+.conta-aviso,
+.conta-erro {
+    border-radius: 12px;
+    font-size: 14px;
+    margin: 0 0 18px;
+    padding: 12px 14px;
+}
+
+.conta-aviso {
+    background: #eefaf3;
+    color: #1d7a45;
+}
+
+.conta-erro {
+    background: #fff1f1;
+    color: #b42318;
+}
+
+.conta-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.conta-form label {
+    color: #5c5678;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 6px;
+}
+
+.conta-form input {
+    background: #f7f5fb;
+    border: 1px solid #e4dff0;
+    border-radius: 12px;
+    color: #201849;
+    font: inherit;
+    font-size: 15px;
+    margin-bottom: 16px;
+    outline: none;
+    padding: 12px 14px;
+    width: 100%;
+}
+
+.conta-form input:focus {
+    border-color: #2c1d57;
+    box-shadow: 0 0 0 3px rgba(44, 29, 87, 0.12);
+}
+
+.conta-linha {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.conta-form button {
+    align-self: flex-start;
+    background: #f6b423;
+    border: 0;
+    border-radius: 999px;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 6px;
+    padding: 12px 28px;
+}
+
+.conta-form button:hover {
+    background: #e8ab1e;
+}
+
+@media (max-width: 640px) {
+    .conta {
+        padding: 24px 16px 56px;
+    }
+
+    .conta-cartao {
+        padding: 24px 18px 20px;
+    }
+
+    .conta-linha {
+        grid-template-columns: 1fr;
+    }
+}

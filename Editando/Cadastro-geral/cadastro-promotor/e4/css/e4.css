@@ -1,0 +1,126 @@
+/* Específico da etapa 5 — método de pagamento (pix x cartão) */
+
+.conteudo-pagamento {
+  width: 100%;
+  max-width: 680px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.metodos {
+  width: 680px;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.metodo-input {
+  display: none;
+}
+
+.metodo-cartao {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  padding: 36px;
+  border-radius: 20px;
+  background-color: var(--branco);
+  border: 3px solid transparent;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .15s ease, border .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.metodo-cartao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px var(--roxo-sombra);
+}
+
+.icone-metodo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(0%) saturate(0%) hue-rotate(155deg) brightness(95%) contrast(85%);
+}
+
+.icone-cartao {
+  height: 98px;
+  margin-top: 16px;
+  margin-bottom: 17px;
+}
+
+.metodo-cartao h2 {
+  margin-top: 36px;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--cinza-card);
+}
+
+#pix:checked + label.metodo-cartao,
+#cartao:checked + label.metodo-cartao {
+  transform: translateY(-2px);
+  border: 5px solid var(--cor-principal);
+  background-color: var(--branco);
+  box-shadow: 0 8px 18px var(--roxo-sombra);
+}
+
+#pix:checked + label.metodo-cartao h2,
+#cartao:checked + label.metodo-cartao h2 {
+  color: var(--cor-principal);
+}
+
+/* Variante roxa (#43007D) do icone: so aparece com o card selecionado.
+   filter: none anula o filtro que cinza-iza o .icone-metodo padrao;
+   opacity: 1 anula a transparencia do .icone-metodo padrao. */
+.metodo-cartao .icone-roxo {
+  display: none;
+  filter: none;
+  opacity: 1;
+}
+
+.metodo-input:checked + label.metodo-cartao .icone-roxo {
+  display: block;
+}
+
+.metodo-input:checked + label.metodo-cartao .icone-metodo:not(.icone-roxo) {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .metodos {
+    width: 100%;
+    grid-template-columns: minmax(0, 390px);
+    gap: 28px;
+  }
+
+  button {
+    margin-top: 46px;
+  }
+}
+
+@media (max-width: 420px) {
+  .metodo-cartao {
+    width: 100%;
+    height: auto;
+    min-height: 440px;
+    padding: 40px 32px;
+  }
+
+  button {
+    width: 100%;
+    max-width: 360px;
+  }
+}

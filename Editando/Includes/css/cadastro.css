@@ -1,0 +1,235 @@
+@charset "UTF-8";
+
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: var(--f1);
+    background: var(--fundo);
+}
+
+.divisao {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+#esquerda {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    background-image: url(../../assets/cadastro-esquerda.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fundo-escuro {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: var(--escuro-foto);
+}
+
+.botao-login {
+    width: 240px;
+    height: 56px;
+    margin-top: 16px;
+    border-radius: 10px;
+    background-color: var(--branco);
+    color: var(--preto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+
+.botao-login:hover {
+    background-color: var(--preto);
+    color: var(--branco);
+    transform: translateY(-1px);
+}
+
+#direita {
+    position: relative;
+    min-height: 100vh;
+    background: var(--fundo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px 36px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.voltar {
+    position: absolute;
+    top: 36px;
+    left: 48px;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color .2s;
+}
+
+.voltar:hover {
+    color: #000;
+}
+
+.titulo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo h1 {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--preto);
+    text-align: center;
+}
+
+.titulo p {
+    margin-top: 6px;
+    font-size: 18px;
+    line-height: 1.25;
+    color: var(--preto);
+    text-align: center;
+}
+
+.resumo-pagamento {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    font-size: 14px;
+    color: var(--texto-escuro);
+    text-align: center;
+}
+
+.resumo-pagamento strong {
+    display: block;
+    color: var(--botao);
+    font-size: 20px;
+}
+
+.titulo strong {
+    font-weight: 800;
+}
+
+.titulo hr {
+    width: 100%;
+    max-width: 500px;
+    height: 2px;
+    margin: 20px 0 24px;
+    background: var(--barra);
+}
+
+button {
+    width: 300px;
+    height: 52px;
+    margin-top: 48px;
+    border-radius: 10px;
+    background-color: var(--botao);
+    color: var(--branco);
+    font-family: var(--f1);
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: .3px;
+    cursor: pointer;
+    transition: background .15s ease, transform .15s ease;
+}
+
+button:hover {
+    background-color: var(--botao-hover);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 1050px) {
+    .linha-cartoes,
+    .planos,
+    .metodos {
+        gap: 35px;
+    }
+}
+
+@media (max-width: 900px) {
+    .divisao {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    #esquerda {
+        min-height: 260px;
+        height: 260px;
+    }
+
+    #direita {
+        min-height: auto;
+        padding: 70px 26px 42px;
+    }
+
+    .voltar {
+        top: 18px;
+        left: 22px;
+    }
+
+    .titulo h1 {
+        font-size: 30px;
+    }
+
+    .titulo p {
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        max-width: 320px;
+        margin-top: 36px;
+    }
+}
+
+@media (max-width: 560px) {
+    #esquerda {
+        min-height: 200px;
+        height: 200px;
+    }
+
+    .botao-login {
+        width: 200px;
+        height: 48px;
+        font-size: 15px;
+    }
+
+    #direita {
+        padding: 56px 18px 32px;
+    }
+
+    .titulo h1 {
+        font-size: 24px;
+    }
+
+    .titulo p {
+        font-size: 14px;
+    }
+
+    .titulo hr {
+        margin: 16px 0 20px;
+    }
+
+    button {
+        height: 48px;
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Harness - modal editar perfil</title>
+<link rel="stylesheet" href="../Includes/css/global.css">
+<link rel="stylesheet" href="../Includes/css/layout.css">
+<link rel="stylesheet" href="CSS/perfil.css">
+<style>
+/* simula o estado de hover para conferir o icone de camera */
+.hover-demo .editar-foto-botao { opacity: 1 !important; }
+body { background:#F4F3F7; padding:16px; }
+.harness { display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start; }
+.overlay-modal { position:static; background:none; padding:0; }
+.modal-sobre { max-height:none; }
+</style>
+</head>
+<body>
+<div class="harness">
+
+  <!-- 1) Estado real: sem banner e sem foto (ambos foto-vazia) -->
+  <div class="overlay-modal aberto">
+    <form class="modal-sobre">
+      <div class="modal-topo">
+        <h3>1. Sem imagem (padrao)</h3>
+        <button type="button"><img src="../assets/fechar.svg" alt=""></button>
+      </div>
+      <div class="editar-fotos">
+        <label class="editar-banner foto-vazia" for="i1a" title="Trocar banner">
+          <span class="editar-banner-fundo" id="p1a"></span>
+          <span class="editar-foto-botao"><img src="../assets/editar_banner.svg" alt=""></span>
+        </label>
+        <label class="editar-avatar foto-vazia" for="i1b" title="Trocar foto de perfil">
+          <img id="p1b" src="../assets/user_dashboard.svg" alt="">
+          <span class="editar-foto-botao"><img src="../assets/editar_foto_perfil.svg" alt=""></span>
+        </label>
+      </div>
+      <input type="file" id="i1a"><input type="file" id="i1b">
+    </form>
+  </div>
+
+  <!-- 2) Estado real: com banner, foto ainda no template do promotor -->
+  <div class="overlay-modal aberto">
+    <form class="modal-sobre">
+      <div class="modal-topo">
+        <h3>2. Com banner</h3>
+        <button type="button"><img src="../assets/fechar.svg" alt=""></button>
+      </div>
+      <div class="editar-fotos">
+        <label class="editar-banner" for="i2a" title="Trocar banner">
+          <span class="editar-banner-fundo" id="p2a" style="background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221200%22%20height%3D%22400%22%3E%3Crect%20width%3D%221200%22%20height%3D%22400%22%20fill%3D%22%237b5cd6%22%2F%3E%3Ctext%20x%3D%22600%22%20y%3D%22215%22%20font-size%3D%2256%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EBanner%201200x400%3C%2Ftext%3E%3C%2Fsvg%3E')"></span>
+          <span class="editar-foto-botao"><img src="../assets/editar_banner.svg" alt=""></span>
+        </label>
+        <label class="editar-avatar foto-vazia" for="i2b" title="Trocar foto de perfil">
+          <img id="p2b" src="../assets/user_dashboard.svg" alt="">
+          <span class="editar-foto-botao"><img src="../assets/editar_foto_perfil.svg" alt=""></span>
+        </label>
+      </div>
+      <input type="file" id="i2a"><input type="file" id="i2b">
+    </form>
+  </div>
+
+  <!-- 3) Mesmo estado do 1, porem com o hover forcado -->
+  <div class="overlay-modal aberto">
+    <form class="modal-sobre">
+      <div class="modal-topo">
+        <h3>3. Hover forcado</h3>
+        <button type="button"><img src="../assets/fechar.svg" alt=""></button>
+      </div>
+      <div class="editar-fotos hover-demo">
+        <label class="editar-banner foto-vazia" for="i3a" title="Trocar banner">
+          <span class="editar-banner-fundo" id="p3a"></span>
+          <span class="editar-foto-botao"><img src="../assets/editar_banner.svg" alt=""></span>
+        </label>
+        <label class="editar-avatar foto-vazia" for="i3b" title="Trocar foto de perfil">
+          <img id="p3b" src="../assets/user_dashboard.svg" alt="">
+          <span class="editar-foto-botao"><img src="../assets/editar_foto_perfil.svg" alt=""></span>
+        </label>
+      </div>
+      <input type="file" id="i3a"><input type="file" id="i3b">
+    </form>
+  </div>
+
+</div>
+</body>
+</html>

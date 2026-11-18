@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "product": "Nathus",
+    "version": "1.0.0",
+    "generated": "2026-10-19T00:00:00Z",
+    "purpose": "Ontologia inicial da plataforma de eventos Nathus: liga a intencao do cliente (contratar um promotor com confianca) as propriedades visuais e requisitos de acessibilidade das telas de busca, perfil e solicitacao.",
+    "schema_version": "1.0.0"
+  },
+  "nodes": {
+    "intents": {
+      "INT-001": {
+        "id": "INT-001",
+        "label": "Contratar um promotor para o evento",
+        "description": "O cliente quer encontrar um buffet, salao ou equipe confiavel e enviar uma solicitacao sem friccao.",
+        "short": "Contratar promotor",
+        "connects_to": ["PSY-001"],
+        "principle": "Reduzir esforco para comparar e decidir",
+        "implication": "A listagem deve expor preco, local e prova social no proprio card."
+      }
+    },
+    "psychology": {
+      "PSY-001": {
+        "id": "PSY-001",
+        "label": "Confianca na escolha",
+        "description": "Diante de varios promotores desconhecidos, o cliente procura sinais de credibilidade antes de investir tempo no contato.",
+        "short": "Confianca",
+        "connects_to": ["EMO-001"],
+        "principle": "Prova social e transparencia reduzem a percepcao de risco",
+        "implication": "Mostrar avaliacoes, fotos reais e informacoes objetivas junto do preco."
+      }
+    },
+    "culture": {
+      "CUL-001": {
+        "id": "CUL-001",
+        "label": "Contexto de eventos no Brasil",
+        "description": "Casamentos, formaturas e festas de 15 anos sao decisões familiares, com forte peso de indicacao e de fotos do espaco.",
+        "short": "Cultura de eventos BR",
+        "connects_to": ["VIS-001"],
+        "principle": "Imagens reais do espaco comunicam mais que texto generico",
+        "implication": "Priorizar galeria e foto de capa reais nos cards e no perfil."
+      }
+    },
+    "emotions": {
+      "EMO-001": {
+        "id": "EMO-001",
+        "label": "Seguranca ao contratar",
+        "description": "O cliente deve sentir que esta no controle: sabe o preco, o que esta incluso e como falar com o promotor.",
+        "short": "Seguranca",
+        "connects_to": ["VIS-001"],
+        "principle": "Estados explicitos reduzem ansiedade",
+        "implication": "Deixar claros os estados de solicitacao (pendente, aceita, recusada)."
+      }
+    },
+    "audience": {
+      "AUD-001": {
+        "id": "AUD-001",
+        "label": "Cliente final do evento",
+        "description": "Pessoa organizando o evento, com pouca familiaridade com contratacao de fornecedores e que usa majoritariamente o celular.",
+        "short": "Cliente final",
+        "connects_to": ["A11Y-001"],
+        "role": "Cliente",
+        "expertise": "novice",
+        "constraints": ["Uso predominante em celular", "Conexoes moveis instaveis"]
+      }
+    },
+    "visual_properties": {
+      "VIS-001": {
+        "id": "VIS-001",
+        "label": "Cards com prova social e preco ancorado",
+        "description": "Cards de listagem com altura uniforme, foto real, nota media, cidade e preco na base do card.",
+        "short": "Card de promotor",
+        "connects_to": [],
+        "property_type": "layout",
+        "specification": "Grid com grid-auto-rows: 1fr; card flex em coluna; preco com margin-top: auto"
+      }
+    },
+    "accessibility": {
+      "A11Y-001": {
+        "id": "A11Y-001",
+        "label": "Contraste e alvos de toque",
+        "description": "Textos com contraste minimo de 4.5:1 e alvos de toque de no minimo 44x44px nas acoes principais.",
+        "short": "Contraste e toque",
+        "connects_to": ["VIS-001"],
+        "rule": "Nunca usar texto claro sobre o amarelo #fdbd24; usar roxo escuro."
+      }
+    }
+  },
+  "edges": {
+    "reasoning_chains": [
+      {
+        "id": "CHAIN-001",
+        "name": "Contratar com confianca",
+        "path": ["INT-001", "PSY-001", "EMO-001", "VIS-001"],
+        "description": "Para contratar, o cliente precisa confiar; a confianca gera seguranca emocional, que se materializa em cards com prova social e preco visivel.",
+        "weight": 4
+      }
+    ]
+  }
+}

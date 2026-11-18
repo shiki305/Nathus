@@ -1,0 +1,140 @@
+/* Específico da etapa 3 — campos de atuação */
+
+button {
+  margin-top: 32px;
+}
+
+.conteudo-campo {
+  width: 680px;
+  max-width: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.lista-campos {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.campo-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.campo-cartao {
+  position: relative;
+  width: 100%;
+  min-height: 88px;
+  padding: 16px 24px;
+  gap: 16px;
+  border-radius: 12px;
+  background-color: var(--branco);
+  border: 2px solid #e4dced;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+
+.campo-cartao:hover {
+  border-color: var(--nathus-roxo);
+}
+
+.campo-cartao:has(.campo-input:checked) {
+  border-color: var(--nathus-roxo);
+  background-color: var(--nathus-roxo-claro);
+}
+
+.campo-cartao:has(.campo-input:focus-visible) {
+  outline: 2px solid var(--nathus-roxo);
+  outline-offset: 2px;
+}
+
+/* O cadastro usa anel de foco amarelo nos campos; no cartão de opção ele destoa,
+   então aqui o anel de foco (inclusive o que aparece ao clicar) fica roxo. */
+.divisao #direita .campo-cartao:focus-within {
+  outline-color: var(--nathus-roxo);
+}
+
+.campo-cartao img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.campo-texto {
+  flex: 1;
+}
+
+.campo-texto h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--preto);
+  line-height: 1.2;
+}
+
+.campo-texto p {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--preto);
+  line-height: 1.25;
+}
+
+.campo-indicador {
+  display: grid;
+  place-items: center;
+  flex: 0 0 20px;
+  height: 20px;
+  border: 2px solid var(--nathus-roxo);
+  border-radius: 50%;
+}
+
+.campo-input:checked ~ .campo-indicador::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--botao);
+}
+
+@media (max-width: 520px) {
+  .lista-campos {
+    width: 100%;
+  }
+
+  .campo-cartao {
+    padding: 16px;
+  }
+
+  .campo-cartao img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .campo-texto h2 {
+    font-size: 18px;
+  }
+
+  .campo-texto p {
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    max-width: 360px;
+  }
+}

@@ -1,0 +1,190 @@
+/* Específico da etapa 4 — escolha de plano */
+
+.conteudo-plano {
+  width: 100%;
+  max-width: 680px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.planos {
+  width: 680px;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.plano-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.plano-cartao {
+  width: 100%;
+  height: 390px;
+  padding: 22px;
+  border-radius: 20px;
+  background-color: var(--branco);
+  border: 3px solid transparent;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform .15s ease, border .15s ease, box-shadow .15s ease;
+}
+
+.plano-cartao:hover {
+  transform: translateY(-2px);
+  border: 3px solid var(--botao);
+  box-shadow: 0 8px 18px var(--roxo-sombra);
+}
+
+.plano-input:checked + .plano-cartao {
+  transform: translateY(-2px);
+  border: 3px solid var(--botao);
+  box-shadow: 0 8px 18px var(--roxo-sombra);
+}
+
+.plano-cartao h2 {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--botao);
+}
+
+.descricao {
+  min-height: 42px;
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--preto);
+}
+
+.preco {
+  margin-top: 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: var(--botao);
+}
+
+.preco span {
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.preco strong {
+  font-size: 34px;
+  font-weight: 500;
+  line-height: .9;
+}
+
+.preco p {
+  color: var(--preto);
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 5px;
+  margin-bottom: 4px;
+}
+
+.plano-cartao ul {
+  width: 260px;
+  margin-top: 24px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.plano-cartao li {
+  display: flex;
+  align-self: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--preto);
+}
+
+.funcionalidade-icone {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.plano-cartao li span {
+  display: block;
+}
+
+.botao-cartao {
+  width: 200px;
+  height: 50px;
+  margin-top: auto;
+  border-radius: 5px;
+  border: 2px solid var(--botao);
+  color: var(--botao);
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s ease, color .15s ease;
+}
+
+.escolhido {
+  display: none;
+}
+
+.plano-input:checked + .plano-cartao .botao-cartao {
+  background: var(--botao);
+  color: var(--branco);
+}
+
+.plano-input:checked + .plano-cartao .escolher {
+  display: none;
+}
+
+.plano-input:checked + .plano-cartao .escolhido {
+  display: inline;
+}
+
+@media (max-width: 900px) {
+  .planos {
+    width: 100%;
+    grid-template-columns: minmax(0, 390px);
+    gap: 28px;
+  }
+
+  button {
+    margin-top: 46px;
+  }
+}
+
+@media (max-width: 420px) {
+  .plano-cartao {
+    width: 100%;
+    height: auto;
+    min-height: 440px;
+    padding: 40px 32px;
+  }
+
+  button {
+    width: 100%;
+    max-width: 360px;
+  }
+}

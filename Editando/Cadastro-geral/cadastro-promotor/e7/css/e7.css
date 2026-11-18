@@ -1,0 +1,179 @@
+/* Foto de perfil + descrição — mesmo layout em grade das outras etapas */
+
+.conteudo-perfil {
+  width: 680px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.conteudo-perfil h1 {
+  font-size: clamp(28px, 2.2vw, 36px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--preto);
+}
+
+.seletor-foto {
+  position: relative;
+  margin-top: 24px;
+}
+
+.foto-perfil {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #f1f1f5;
+  border: 2px solid var(--nathus-roxo);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.foto-perfil-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(15, 10, 35, .55);
+  opacity: 0;
+  transition: opacity .15s ease;
+}
+
+.foto-perfil:hover .foto-perfil-overlay,
+.input-foto:focus-visible + .foto-perfil .foto-perfil-overlay {
+  opacity: 1;
+}
+
+.input-foto:focus-visible + .foto-perfil {
+  outline: var(--cadastro-espessura-foco) solid var(--cadastro-amarelo-foco);
+  outline-offset: 2px;
+}
+
+.foto-perfil-overlay img {
+  display: block;
+  width: 32px;
+  height: auto;
+}
+
+.foto-perfil:not(.tem-foto) > img {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+  filter: invert(62%) sepia(18%) saturate(540%) hue-rotate(210deg) brightness(92%);
+}
+
+.foto-perfil.tem-foto {
+  background: transparent;
+}
+
+.foto-perfil.tem-foto > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.input-foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .foto-perfil-overlay {
+    transition: none;
+  }
+}
+
+.barra-perfil {
+  width: 100%;
+  height: 2px;
+  margin-top: 24px;
+  background: #DEE3E7;
+}
+
+.descricao-perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.descricao-perfil textarea {
+  width: 100%;
+  min-height: 144px;
+  padding: 16px;
+  border-radius: var(--cadastro-raio-campo);
+  background: var(--cadastro-fundo-campo);
+  color: var(--preto);
+  font-size: 15px;
+  font-family: var(--f1);
+  font-weight: 400;
+  resize: none;
+  outline: none;
+}
+
+/* Frase de destaque: mesmo acabamento da descrição, em uma linha. */
+.descricao-perfil input[type="text"] {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: var(--cadastro-raio-campo);
+  background: var(--cadastro-fundo-campo);
+  color: var(--preto);
+  font-size: 15px;
+  font-family: var(--f1);
+  font-weight: 400;
+  outline: none;
+}
+
+.descricao-perfil input[type="text"]::placeholder {
+  color: #8a8a96;
+}
+
+.descricao-perfil label {
+  color: var(--cadastro-rotulo);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.descricao-perfil textarea:focus-visible,
+.descricao-perfil input[type="text"]:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--focus-sombra);
+}
+
+.limite-descricao {
+  text-align: right;
+  font-size: 13px;
+}
+
+.limite-descricao[role="alert"] {
+  color: #a12626;
+}
+
+button {
+  width: 300px;
+  height: 52px;
+  margin-top: 24px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+@media (max-width: 420px) {
+  button {
+    width: 100%;
+    max-width: 300px;
+  }
+}

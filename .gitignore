@@ -1,0 +1,34 @@
+# ============================================================
+# Nathus - o que NAO vai para o repositorio
+# ============================================================
+
+# Copia antiga do projeto, usada so como backup local (~162 MB)
+/Atual/
+
+# Imagens enviadas pelos usuarios nos perfis demo (~85 MB)
+Editando/uploads/
+
+# Backups locais
+Editando/backups/
+
+# Artefatos de execucao do setup local (gerados na maquina de quem roda)
+Editando/servidor.porta
+Editando/.mysql-iniciado
+Editando/.setup-tmp
+Editando/.verifica-tmp
+Editando/setup.log
+
+# Logs
+*.log
+
+# Ferramentas locais do agente
+.agents/
+.freebuff/
+
+# Sistema operacional / editores
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+.idea/
+.vscode/

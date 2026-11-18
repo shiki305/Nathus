@@ -1,0 +1,394 @@
+@charset "UTF-8";
+
+:root {
+    --painel-branco: #ffffff;
+    --painel-preto: #24132d;
+    --painel-cinza-texto: #6e6e6e;
+    --painel-cinza-claro: #f3f3f5;
+    --painel-borda: #e4e4e8;
+    --painel-sombra: rgba(0,0,0,.05);
+    --fonte: "Poppins", Arial, sans-serif;
+}
+
+body {
+    font-family: var(--fonte);
+    color: var(--painel-preto);
+    background: var(--painel-cinza-claro);
+    font-size: 14px;
+}
+
+button {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ============================================================
+   LAYOUT PRINCIPAL
+   ============================================================ */
+
+.painel-conteudo {
+    max-width: 1480px;
+    margin-inline: auto;
+    padding: 24px clamp(16px, 2.5vw, 36px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.linha-status {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+    margin: 24px 0;
+}
+
+.card-status {
+    background: var(--painel-branco);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 1px 3px var(--painel-sombra);
+}
+
+.status-icone {
+    width: 48px;
+    height: 48px;
+    flex: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-icone img {
+    width: 24px;
+    height: 24px;
+}
+
+.status-roxo {
+    background: #ece6fb;
+}
+
+.status-verde {
+    background: #d6f2e4;
+}
+
+.status-laranja {
+    background: #ffeac2;
+}
+
+.status-azul {
+    background: #d9e8ff;
+}
+
+.status-rotulo {
+    display: block;
+    font-size: 12px;
+    color: var(--painel-cinza-texto);
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.status-numero {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--painel-preto);
+}
+
+.linha-meio {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.linha-meio > .painel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.grafico {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 4px;
+    width: 100%;
+    height: 180px;
+    align-items: end;
+    border-radius: 5px;
+}
+
+.proximo-item {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr) 12px;
+    align-items: center;
+    gap: 12px;
+    min-block-size: var(--proximo-item-altura);
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: var(--painel-preto);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.proximo-item:hover {
+    background: #f8f6fc;
+}
+
+.proximo-item:focus-visible {
+    outline: 2px solid var(--nathus-roxo);
+    outline-offset: -2px;
+}
+
+@media (max-width: 480px) {
+    .proximo-item {
+        grid-template-columns: 58px minmax(0, 1fr) 8px;
+        gap: 8px;
+        padding-inline: 12px;
+    }
+}
+
+.proximo-item + .proximo-item {
+    border-top: 1px solid var(--painel-borda);
+}
+
+.lista-vazia {
+    padding: 24px 16px;
+    text-align: center;
+    color: var(--painel-cinza-texto);
+    font-size: 13px;
+}
+
+.painel {
+    background: var(--painel-branco);
+    border-radius: 14px;
+    padding: 16px 24px 24px;
+    box-shadow: 0 1px 3px var(--painel-sombra);
+}
+
+.painel-cabecalho {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    margin-bottom: 8px;
+}
+
+.painel-cabecalho h2 {
+    color: #202026;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.ver-todas {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ft02-roxo-intermediario);
+}
+
+.ver-todas:hover {
+    text-decoration: underline;
+}
+
+.painel-corpo {
+    padding-top: 24px;
+}
+
+.grafico-coluna {
+    height: 100%;
+    display: flex;
+    align-items: end;
+}
+
+.grafico-barra {
+    position: relative;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    background: var(--ft02-amarelo);
+}
+
+.grafico-valor {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: calc(100% + 4px);
+    color: var(--painel-preto);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.grafico-meses {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 4px;
+    margin-top: 12px;
+}
+
+.grafico-meses span {
+    text-align: center;
+    font-size: 10px;
+    color: var(--painel-cinza-texto);
+}
+
+.proximos-lista {
+    --proximo-item-altura: 80px;
+    min-block-size: calc(var(--proximo-item-altura) * 3);
+}
+
+.proximo-dados {
+    line-height: 1.45;
+}
+
+.proximo-data {
+    display: grid;
+    place-content: center;
+    gap: 3px;
+    min-height: 54px;
+    background: #ece6fb;
+    border: 1px solid #ddd2f1;
+    border-radius: 8px;
+    padding: 9px 5px;
+    text-align: center;
+    color: var(--nathus-roxo-escuro);
+    line-height: 1.35;
+    text-transform: uppercase;
+}
+
+.proximo-data strong {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.proximo-data span {
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.proximo-dados strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.proximo-cliente {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--painel-cinza-texto);
+}
+
+.proximo-cliente .avatar-cliente-card {
+    width: 20px;
+    height: 20px;
+}
+
+.proximo-cliente .avatar-cliente-card img {
+    display: block;
+}
+
+.proximo-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--painel-preto);
+}
+
+.proximo-meta > span {
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.proximo-meta > span::before {
+    margin-top: 2px;
+    background-color: var(--ft02-roxo-intermediario);
+}
+
+.proximo-seta {
+    text-align: right;
+}
+
+.proximo-seta img {
+    width: 7px;
+    height: 11px;
+}
+
+.solicitacoes-painel {
+    width: 100%;
+}
+
+.solicitacoes-painel .card-pendencia,
+.solicitacoes-painel .solicitacoes-vazio {
+    box-shadow: none;
+}
+
+.solicitacoes-painel .solicitacoes-vazio {
+    padding: 16px;
+    border: 0;
+    background: var(--nathus-roxo-claro);
+}
+
+.painel-titulo-pendencias {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 8px;
+}
+
+.painel-titulo-pendencias .solicitacoes-contagem {
+    padding: 4px 8px;
+}
+
+@media (max-width: 1100px) {
+    .linha-status {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .linha-meio {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .proximos-lista {
+        min-block-size: auto;
+    }
+
+}
+
+@media (max-width: 560px) {
+    .painel-conteudo,
+    .painel {
+        padding-inline: 16px;
+    }
+
+    .card-status {
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .status-icone {
+        width: 40px;
+        height: 40px;
+    }
+
+    .status-rotulo {
+        overflow-wrap: anywhere;
+    }
+}
