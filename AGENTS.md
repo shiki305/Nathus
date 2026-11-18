@@ -12,18 +12,18 @@ Conteúdo em **pt-BR**.
 
 ## Como rodar
 
-- **Código do app:** `C:\xampp\htdocs\Nathus\Editando\`.
+- **Código do app:** `C:\xampp\htdocs\Nathus\Projeto\`.
   As pastas antigas `Nathus - Perfil Promotor`, `Nathus - Perfis Demo` e `NathusDoBem` **não
   existem mais**; estes `.md` ficam na raiz `C:\xampp\htdocs\Nathus\`, um nível acima do app.
-- Com Apache: `http://localhost/Nathus/Editando/` — o `index.php`
+- Com Apache: `http://localhost/Nathus/Projeto/` — o `index.php`
   da pasta do app redireciona para `home/homeAnt.php`.
   A raiz `Nathus` serve apenas para organização e não tem `index.php` do app.
 - Ou servidor embutido do PHP apontando para a pasta do app:
   ```powershell
   & C:\xampp\php\php.exe -S localhost:8090 -t "C:\xampp\htdocs"
   ```
-  (docroot na pasta pai mantém as URLs `/Nathus/Editando/...`).
-- **Atalho sem Apache:** `setup.cmd` (dentro de `Editando`, a raiz do projeto) abre um **menu
+  (docroot na pasta pai mantém as URLs `/Nathus/Projeto/...`).
+- **Atalho sem Apache:** `setup.cmd` (dentro de `Projeto`, a raiz do projeto) abre um **menu
   numerado** no cmd: `1` verificar programas, `2` subir o MySQL, `3` criar o banco,
   `4` importar perfis demo, `5` abrir o site, `6` parar o site, `7` diagnóstico completo,
   `8` resetar o banco, `0` sair. O menu mostra o estado (MySQL/site) no topo e volta para a
@@ -31,9 +31,9 @@ Conteúdo em **pt-BR**.
   valem (Enter, espaço e tecla errada são ignorados sem redesenhar a tela — era isso que
   fazia o menu "piscar" com o `set /p`). `setup.cmd reset` faz o reset direto, sem menu.
   O site sobe no servidor embutido do PHP na primeira porta livre a partir de 8000, com a
-  pasta `Nathus` como docroot — as URLs ficam `http://localhost:<porta>/Nathus/Editando/...`.
+  pasta `Nathus` como docroot — as URLs ficam `http://localhost:<porta>/Nathus/Projeto/...`.
   `parar.cmd` e `verificar.cmd` ficam na mesma pasta e funcionam fora do menu; o reset salva
-  backup em `Editando/backups/`. Logs em `Editando/setup.log` e `Editando/php-erros.log`.
+  backup em `Projeto/backups/`. Logs em `Projeto/setup.log` e `Projeto/php-erros.log`.
 - Área do espaço (m²) é **obrigatória** em contas de local de festas (campo, JS e
   `salvar-editar-perfil.php`); criar pacote exige endereço e área.
 - Banco: importar `Banco/nathus.sql` no MySQL do XAMPP; conexão em `Includes/conexao.php`
@@ -168,7 +168,7 @@ Arquivos atualizados:
 
 ## Convenções e decisões (respeitar!)
 
-- **Endereço do espaço em Editando:** cada promotor do campo `local` tem um endereço em
+- **Endereço do espaço em Projeto:** cada promotor do campo `local` tem um endereço em
   `promotor.espaco_*`, com cidade e UF do perfil. O endereço completo é requisito para
   salvar o perfil como Local, criar pacotes e receber novas solicitações. Complemento e
   área são opcionais. A solicitação grava uma cópia do endereço
@@ -187,12 +187,12 @@ Arquivos atualizados:
   nunca o tom amarromado `#946B00`. O amarelo de ação (`--ft02-dourado-acao`) usa
   `#F5B600` e aparece em "Mudar para este plano" e "Ver detalhes".
 
-- **Navegação do painel em Editando:** `Includes/sidebar.php` usa a referência
+- **Navegação do painel em Projeto:** `Includes/sidebar.php` usa a referência
   do Figma com ícones de contorno e destaque lilás na página ativa. O selo de
   Solicitações conta apenas as pendências do promotor logado. A navegação usa
   barra inferior no celular.
 
-- **Paleta FT-02 em Editando:** `Includes/css/global.css` guarda os valores
+- **Paleta FT-02 em Projeto:** `Includes/css/global.css` guarda os valores
   compartilhados pelo painel e pelo perfil público. Os ícones de especialidade
   usam a cor do texto da etiqueta nas duas visões. Os botões do topo do perfil usam
   fundo transparente. Editar perfil usa amarelo `#F5B600` no contorno,
@@ -237,7 +237,7 @@ Arquivos atualizados:
    grid estica, então o card é `flex` em coluna com o preço/nota ancorado na base
    (`margin-top: auto`) e o grid usa `grid-auto-rows: 1fr`. Bug corrigido na versão antiga
    (`organizador-cartao`): card sem "frase destaque" ficava mais baixo que os vizinhos.
-3. **Padrão de formulário em Editando:** os dois fluxos usam Poppins em títulos,
+3. **Padrão de formulário em Projeto:** os dois fluxos usam Poppins em títulos,
    rótulos e controles. Os formulários de dados pessoais e de cartão têm largura
    fluida de até 680px, campos de 48px com fundo `#E2E4E9`, raio de 8px e rótulos grafite de 15px.
    A descrição do perfil usa o mesmo raio e estilo de rótulo.
@@ -272,7 +272,7 @@ Arquivos atualizados:
    (`garantir_colunas_solicitacoes()`), então bancos antigos se ajustam ao primeiro acesso.
    Pedidos legados sem destinatário verificado ficam com `id_promotor` nulo até revisão.
    O schema inclui chaves para cliente e promotor e índices para agenda e histórico.
-   Para um banco existente, aplicar uma vez `Editando/Banco/integridade_solicitacoes.sql`
+   Para um banco existente, aplicar uma vez `Projeto/Banco/integridade_solicitacoes.sql`
    após conferir as referências.
    Só conta de cliente envia pedido: `Cliente/solicitacao.php` bloqueia conta promotor e manda
    visitante para `Login/login.php?voltar=...`.
@@ -304,15 +304,15 @@ Arquivos atualizados:
     case-insensitive (`vt_bate()`) sobre nome/frase/cidade, sem `ob_start`/regex e sem card fantasma.
     Os selects são o componente `vt_menu()` (`button` + `input[hidden]` + `ul role="listbox"`),
     **não** `<select>`. Cards `pro-card` (`pro-capa`, `pro-avatar`, `pro-frase`, `pro-meta`,
-    `pro-nota`) têm altura uniforme. Em `Editando`, `pro-preco` mostra o
+    `pro-nota`) têm altura uniforme. Em `Projeto`, `pro-preco` mostra o
     preço mínimo por evento ou “Sob consulta” quando o valor está ausente.
     A vitrine, o filtro e as duas visões do perfil calculam esse mínimo pelo
     pacote com o menor preço cadastrado, sem edição manual no perfil.
-    Editando e Atual compartilham o banco local e não usam coluna de preço
+    Projeto e Atual compartilham o banco local e não usam coluna de preço
     mínimo em `promotor`. Perfis sem pacotes mostram o estado vazio.
-    O filtro de preço de `Editando` oferece só o teto “Até”. Os campos de
+    O filtro de preço de `Projeto` oferece só o teto “Até”. Os campos de
     dinheiro usam `data-mascara="moeda"` e validação em `Includes/moeda.php`.
-12. **Formulário de solicitação em Editando:** `localStorage` guarda só os dados do evento
+12. **Formulário de solicitação em Projeto:** `localStorage` guarda só os dados do evento
     com debounce de 300ms e validade de 7 dias. O rascunho é limpo após a confirmação do envio.
     O formulário usa datas em DD/MM/AAAA, com calendário opcional, e horários
     em 24 horas. O campo de convidados é obrigatório e rejeita valores acima do limite do
@@ -362,7 +362,7 @@ Arquivos atualizados:
     correspondente e é marcado como lido ao acessar o pedido pelo sino.
     Os links levam a Solicitações do painel para promotores e `home/minhas-solicitacoes.php`
     para clientes. Notificações e menu de conta são exclusivos entre si e fecham com Escape/clique fora.
-    Em `Editando`, o menu usa `ehPromotor()`: promotores têm "Meu perfil",
+    Em `Projeto`, o menu usa `ehPromotor()`: promotores têm "Meu perfil",
     "Dashboard" e "Sair" na vitrine e no painel, com as mesmas cores.
     Clientes têm "Editar perfil", "Solicitações enviadas" e "Sair" na vitrine.
     O modal e a rota de salvamento de conta da vitrine são exclusivos de clientes.
@@ -391,7 +391,7 @@ Arquivos atualizados:
     escala solicitados para o perfil devem ser conferidos nas duas páginas.
     Exceção: os pacotes públicos usam `auto-fit` com mínimo fluido de 320px, preenchendo
     a largura disponível para dar mais destaque às imagens e aos serviços.
-    Em `Editando`, o perfil público segue a largura e os espaçamentos do painel,
+    Em `Projeto`, o perfil público segue a largura e os espaçamentos do painel,
     com capa de até 220px e avatar de 118px no desktop. As duas telas usam
     etiquetas roxas com cantos de 8px. No perfil público, o título usa o nome
     fantasia quando cadastrado, seguido do nome próprio se for diferente.

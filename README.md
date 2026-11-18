@@ -62,11 +62,11 @@ O Nathus tem dois lados que conversam entre si:
 Baixe em <https://www.apachefriends.org/> e instale normalmente (recomendado em `C:\xampp`).
 
 ### 2. Coloque o projeto dentro do `htdocs`
-Copie a pasta do projeto (a que **contém** a pasta `Editando`) para dentro do `htdocs`, por exemplo:
+Copie a pasta do projeto (a que **contém** a pasta `Projeto`) para dentro do `htdocs`, por exemplo:
 
 ```
 C:\xampp\htdocs\Nathus\
-└─ Editando\        <- a aplicação fica aqui dentro
+└─ Projeto\        <- a aplicação fica aqui dentro
 ```
 
 > O nome da pasta pode ser outro — o script detecta o nome dela automaticamente para montar a URL.
@@ -75,7 +75,7 @@ C:\xampp\htdocs\Nathus\
 Dê **duplo clique** em:
 
 ```
-C:\xampp\htdocs\Nathus\Editando\setup.cmd
+C:\xampp\htdocs\Nathus\Projeto\setup.cmd
 ```
 
 Vai abrir um **menu numerado** no prompt de comando. No topo ele já mostra o estado atual
@@ -97,14 +97,14 @@ Ou seja: **`1` → `2` → `3` → `4` → `5`**. Depois de cada ação o menu v
 A opção `5` abre o navegador em algo como:
 
 ```
-http://localhost:8000/Nathus/Editando/
+http://localhost:8000/Nathus/Projeto/
 ```
 
 A porta `8000` é só um exemplo: o script escolhe a **primeira porta livre** a partir de 8000
 (8000, 8001, 8002…). O endereço exato aparece na tela e no menu.
 
 ### 6. Para encerrar
-Use a opção **`6` (Parar o site)** no próprio menu, ou dê duplo clique em `Editando\parar.cmd`.
+Use a opção **`6` (Parar o site)** no próprio menu, ou dê duplo clique em `Projeto\parar.cmd`.
 
 ---
 
@@ -114,7 +114,7 @@ Use a opção **`6` (Parar o site)** no próprio menu, ou dê duplo clique em `E
 |:---:|---|
 | **`6`** | **Parar o site** — encerra o servidor do site. |
 | **`7`** | **Diagnóstico completo** — roda o `verificar.cmd` (programas, portas, banco, contagens e arquivos). |
-| **`8`** | **Resetar o banco** — **apaga** o banco e recria tudo do zero, salvando antes um backup em `Editando/backups/`. Pede confirmação digitando `APAGAR`. |
+| **`8`** | **Resetar o banco** — **apaga** o banco e recria tudo do zero, salvando antes um backup em `Projeto/backups/`. Pede confirmação digitando `APAGAR`. |
 | **`0`** | **Sair** do menu. |
 
 ### Atalhos pela linha de comando
@@ -126,7 +126,7 @@ setup.cmd --porta 8090    :: força o site a subir numa porta específica
 setup.cmd --sem-navegador :: sobe o site sem abrir o navegador
 ```
 
-Também existem, soltos na pasta `Editando`, o **`verificar.cmd`** (diagnóstico) e o
+Também existem, soltos na pasta `Projeto`, o **`verificar.cmd`** (diagnóstico) e o
 **`parar.cmd`** (encerra o site), que funcionam fora do menu.
 
 ---
@@ -157,7 +157,7 @@ Nathus/
 ├─ README.md
 ├─ AGENTS.md                 guia técnico do projeto
 ├─ CHANGELOG.md              histórico de mudanças
-└─ Editando/                 aplicação
+└─ Projeto/                  aplicação
    ├─ index.php              redireciona para home/homeAnt.php
    ├─ setup.cmd              menu de setup     (verificar.cmd / parar.cmd ao lado)
    ├─ Banco/                 nathus.sql (estrutura) + perfis-demo.sql (contas demo)
@@ -174,7 +174,7 @@ Nathus/
    ├─ Relatorios/            relatórios por ano + PDF
    ├─ Includes/              PHP, CSS e JS compartilhados
    ├─ assets/  Fontes/       imagens e fontes locais
-   └─ uploads/               imagens enviadas pelos usuários (não versionado)
+   └─ uploads/               imagens enviadas (só as fotos demo-* vão no repositório)
 ```
 
 ---
@@ -193,13 +193,14 @@ Nathus/
 
 ## ℹ️ Observações
 
-- **Banco de dados:** conexão configurada em `Editando/Includes/conexao.php` como
+- **Banco de dados:** conexão configurada em `Projeto/Includes/conexao.php` como
   `localhost`, usuário `root`, **sem senha**, banco `nathus`.
-- **Imagens enviadas:** a pasta `Editando/uploads/` **não** vem no repositório (são arquivos
-  gerados pelo uso). Ela é criada automaticamente no primeiro upload. Por isso, as fotos das
-  contas de demonstração não acompanham o projeto e podem aparecer com as imagens padrão.
-- **Logs:** `Editando/setup.log` (setup do banco) e `Editando/php-erros.log` (erros do PHP).
-- **Backups:** a opção `8` (resetar) salva um dump antes de apagar, em `Editando/backups/`.
+- **Imagens enviadas:** a pasta `Projeto/uploads/` guarda as fotos dos perfis. Ela é recriada
+  automaticamente conforme as imagens são enviadas. No repositório vão **apenas as fotos das
+  contas de demonstração** (arquivos `demo-*`), para os perfis de exemplo aparecerem completos;
+  as demais imagens não são versionadas.
+- **Logs:** `Projeto/setup.log` (setup do banco) e `Projeto/php-erros.log` (erros do PHP).
+- **Backups:** a opção `8` (resetar) salva um dump antes de apagar, em `Projeto/backups/`.
 
 ---
 

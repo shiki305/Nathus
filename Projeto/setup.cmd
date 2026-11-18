@@ -4,7 +4,7 @@ title Nathus - menu
 color 0F
 
 rem ------------------------------------------------------------------
-rem  Nathus - menu numerado de setup. Fica dentro da pasta Editando.
+rem  Nathus - menu numerado de setup. Fica dentro da pasta Projeto.
 rem  Uso:  setup.cmd             abre o menu
 rem        setup.cmd reset       reinicia o banco direto (sem menu)
 rem        setup.cmd --porta N   fixa a porta do site
@@ -177,8 +177,8 @@ if defined PHP (
     echo.
 )
 
-if not exist "%APP%\Banco\nathus.sql" echo    FALTA Editando\Banco\nathus.sql
-if not exist "%APP%\Banco\perfis-demo.sql" echo    FALTA Editando\Banco\perfis-demo.sql
+if not exist "%APP%\Banco\nathus.sql" echo    FALTA Projeto\Banco\nathus.sql
+if not exist "%APP%\Banco\perfis-demo.sql" echo    FALTA Projeto\Banco\perfis-demo.sql
 if exist "%APP%\Banco\nathus.sql" if exist "%APP%\Banco\perfis-demo.sql" echo    Arquivos do banco OK
 exit /b
 
@@ -231,7 +231,7 @@ rem ------------------------------------------------------------------
 :f_banco
 echo.
 if not exist "%APP%\Banco\nathus.sql" (
-    echo    Falta o arquivo Editando\Banco\nathus.sql
+    echo    Falta o arquivo Projeto\Banco\nathus.sql
     exit /b
 )
 call :mysql_online
@@ -279,7 +279,7 @@ rem ------------------------------------------------------------------
 :f_demo
 echo.
 if not exist "%APP%\Banco\perfis-demo.sql" (
-    echo    Falta o arquivo Editando\Banco\perfis-demo.sql
+    echo    Falta o arquivo Projeto\Banco\perfis-demo.sql
     exit /b
 )
 call :mysql_online
@@ -433,11 +433,11 @@ if not "!MYSQL_ONLINE!"=="1" (
     exit /b
 )
 if not exist "%APP%\Banco\nathus.sql" (
-    echo    Falta o arquivo Editando\Banco\nathus.sql
+    echo    Falta o arquivo Projeto\Banco\nathus.sql
     exit /b
 )
 if not exist "%APP%\Banco\perfis-demo.sql" (
-    echo    Falta o arquivo Editando\Banco\perfis-demo.sql
+    echo    Falta o arquivo Projeto\Banco\perfis-demo.sql
     exit /b
 )
 

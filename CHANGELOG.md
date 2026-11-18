@@ -1,5 +1,18 @@
     # CHANGELOG
 
+## 2026-11-17 - Pasta do app renomeada para Projeto e README na raiz
+
+- A pasta do aplicativo passou de `Editando` para `Projeto` (mesmo conteúdo, mesmo
+  funcionamento). As URLs do site local viraram `http://localhost:<porta>/Nathus/Projeto/...`.
+  `setup.cmd`, `parar.cmd` e `verificar.cmd` detectam o nome da pasta sozinhos, então só os
+  textos de ajuda precisaram de ajuste. As entradas **abaixo** desta citam a pasta pelo nome
+  antigo (`Editando/`), porque descrevem o estado da época.
+- Adicionado `README.md` na raiz do repositório, com a visão geral do projeto e o passo a passo
+  de como usar o `setup.cmd`.
+- As fotos das contas de demonstração (`Projeto/uploads/**/demo-*`, ~29 MB) passaram a ser
+  versionadas, para os perfis de exemplo aparecerem completos em um clone novo. O restante de
+  `Projeto/uploads/` continua fora do repositório.
+
 ## 2026-11-17 - Subtítulo do topo removido nas telas do promotor
 
 - O topo do painel (`Includes/header.php`) mostrava uma linha de descrição sob o título

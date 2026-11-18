@@ -5,18 +5,36 @@
 # Copia antiga do projeto, usada so como backup local (~162 MB)
 /Atual/
 
-# Imagens enviadas pelos usuarios nos perfis demo (~85 MB)
-Editando/uploads/
+# Imagens enviadas pelos usuarios: ficam fora, com uma excecao.
+# As fotos das contas demo (nome demo-*) vao no repositorio para os perfis de
+# exemplo aparecerem completos; todo o resto de uploads/ e ignorado.
+Projeto/uploads/*
+!Projeto/uploads/banner/
+!Projeto/uploads/galeria/
+!Projeto/uploads/pacotes/
+!Projeto/uploads/perfil-promotor/
+!Projeto/uploads/perfil-cliente/
+
+Projeto/uploads/banner/*
+!Projeto/uploads/banner/demo-*
+Projeto/uploads/galeria/*
+!Projeto/uploads/galeria/demo-*
+Projeto/uploads/pacotes/*
+!Projeto/uploads/pacotes/demo-*
+Projeto/uploads/perfil-promotor/*
+!Projeto/uploads/perfil-promotor/demo-*
+Projeto/uploads/perfil-cliente/*
+!Projeto/uploads/perfil-cliente/demo-*
 
 # Backups locais
-Editando/backups/
+Projeto/backups/
 
 # Artefatos de execucao do setup local (gerados na maquina de quem roda)
-Editando/servidor.porta
-Editando/.mysql-iniciado
-Editando/.setup-tmp
-Editando/.verifica-tmp
-Editando/setup.log
+Projeto/servidor.porta
+Projeto/.mysql-iniciado
+Projeto/.setup-tmp
+Projeto/.verifica-tmp
+Projeto/setup.log
 
 # Logs
 *.log
