@@ -1,41 +1,29 @@
+@charset "UTF-8";
+
+/* Botão "Voltar" no estilo antigo: link de texto com seta, sem caixa.
+   O visual vive aqui (e não no HTML) para as 10 telas que usam a classe
+   herdarem a mudança de uma vez. */
 .botao-voltar {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    min-height: 44px;
-    padding: 8px 14px;
+    gap: 6px;
     width: fit-content;
-    flex: 0 0 auto;
-    border: 1px solid rgba(71, 1, 132, .25);
-    border-radius: 8px;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
     text-decoration: none;
-    color: var(--cor-principal);
-    background: linear-gradient(var(--cor-principal), var(--cor-principal)) no-repeat left center;
-    background-size: 0% 100%;
-    transition: background-size .18s ease, color .18s ease;
 }
 
+/* Seta de texto (U+2190), no lugar do ícone mascarado que existia antes.
+   Só o tamanho do glifo cresce; o peso fica o da fonte. */
 .botao-voltar::before {
-    content: "";
-    width: 16px;
-    height: 16px;
-    background: currentColor;
-    mask: url("../../assets/cadastro-voltar.svg") center / contain no-repeat;
-}
-
-.botao-voltar:is(:hover, :focus-visible) {
-    color: #fff;
-    background-size: 100% 100%;
+    content: "\2190";
+    font-size: 17px;
+    line-height: 1;
 }
 
 .botao-voltar:focus-visible {
-    outline: 2px solid var(--cor-principal);
+    outline: 2px solid var(--cor-principal, #470184);
     outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .botao-voltar {
-        transition: none;
-    }
 }

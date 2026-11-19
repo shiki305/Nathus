@@ -10,8 +10,15 @@ session_start();
     <link rel="icon" type="image/png" href="../assets/favicon.png?v=2">
     <link rel="stylesheet" href="../Includes/css/global.css?v=<?php echo filemtime(__DIR__ . '/../Includes/css/global.css'); ?>">
     <link rel="stylesheet" href="css/vitrine.css?v=<?php echo filemtime(__DIR__ . '/css/vitrine.css'); ?>">
+    <script>
+        // Só ativa o topo flutuante quando o usuário aceita movimento. Sem JS
+        // (ou com movimento reduzido) o topo continua sticky, como nas outras páginas.
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('vt-topo-flutuante--ativo');
+        }
+    </script>
 </head>
-<body class="vt">
+<body class="vt vt-topo-flutuante">
     <?php include __DIR__ . '/topo-vitrine.php'; ?>
 
     <section class="vt-hero" aria-label="Nathus">
@@ -32,7 +39,7 @@ session_start();
                 <img src="../assets/home/o2.png" alt="">
                 <div class="entrada-texto">
                     <small>Quem planeja o evento</small>
-                    <h3>Promotores &amp; Organizadores</h3>
+                    <h3>Organizadores</h3>
                     <p>Encontre profissionais com experiência, reputação e uma rede pronta para transformar sua ideia em um evento memorável.</p>
                 </div>
             </a>
@@ -41,7 +48,7 @@ session_start();
                 <img src="../assets/home/cardapio1.png" alt="">
                 <div class="entrada-texto">
                     <small>Experiências que ficam na memória</small>
-                    <h3>Buffet &amp; Gastronomia</h3>
+                    <h3>Buffets</h3>
                     <p>Conheça opções deliciosas, estilos de serviço e equipes gastronômicas para eventos de todos os formatos e tamanhos.</p>
                 </div>
             </a>
@@ -50,7 +57,7 @@ session_start();
                 <img src="../assets/home/EC.png" alt="">
                 <div class="entrada-texto">
                     <small>O cenário ideal para a celebração</small>
-                    <h3>Espaços &amp; Casas de Festas</h3>
+                    <h3>Espaços de festa</h3>
                     <p>Compare ambientes, estruturas, capacidades e localizações para encontrar o espaço perfeito para o seu evento.</p>
                 </div>
             </a>

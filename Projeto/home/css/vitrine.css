@@ -30,6 +30,31 @@ body.vt {
     z-index: 30;
 }
 
+/* Home: o hero ocupa também a faixa do topo. O cabeçalho sai do fluxo, fica
+   escondido acima da tela e desce quando a rolagem passa da altura do hero. */
+html.vt-topo-flutuante--ativo .vt-topo {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateY(-100%);
+    transition: transform .25s ease;
+}
+
+html.vt-topo-flutuante--ativo .vt-topo--visivel,
+html.vt-topo-flutuante--ativo .vt-topo:focus-within {
+    transform: translateY(0);
+}
+
+/* Com movimento reduzido tudo volta ao topo sticky de sempre. */
+@media (prefers-reduced-motion: reduce) {
+    html.vt-topo-flutuante--ativo .vt-topo {
+        position: sticky;
+        transform: none;
+        transition: none;
+    }
+}
+
 .vt-logo {
     grid-column: 1;
     justify-self: start;
@@ -139,7 +164,7 @@ button.vt-usuario {
 .vt-hero {
     align-items: center;
     display: flex;
-    height: 460px;
+    height: 620px;
     justify-content: center;
     overflow: hidden;
     position: relative;
@@ -156,7 +181,9 @@ button.vt-usuario {
 }
 
 .vt-hero::after {
-    background: linear-gradient(180deg, rgba(12, 6, 24, 0.28) 0%, rgba(12, 6, 24, 0.55) 100%);
+    background:
+        linear-gradient(180deg, rgba(12, 6, 24, 0.28) 0%, rgba(12, 6, 24, 0.55) 100%),
+        radial-gradient(62% 52% at 50% 58%, rgba(10, 5, 20, 0.50), rgba(10, 5, 20, 0) 78%);
     content: "";
     inset: 0;
     position: absolute;
@@ -183,7 +210,7 @@ button.vt-usuario {
 }
 
 .vt-hero p {
-    color: rgba(255, 255, 255, 0.88);
+    color: #fff;
     font-size: 15px;
     line-height: 1.55;
     margin: 18px auto 0;
@@ -289,6 +316,13 @@ button.vt-usuario {
     font-size: 13px;
     line-height: 1.45;
     margin: 0;
+    /* Três linhas fixas: sem isso o título sobe ou desce conforme o texto
+       de cada card quebra em mais ou menos linhas. */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    min-height: calc(3 * 1.45em);
 }
 
 .vt-lista {
@@ -627,6 +661,7 @@ button.vt-usuario {
 
 .sol-lista {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 14px;
     margin: 0 auto;
     max-width: 1120px;
@@ -694,9 +729,10 @@ button.vt-usuario {
     justify-content: space-between;
     gap: 10px 16px;
     margin-top: 16px;
-    padding: 10px 14px;
+    padding: 12px 14px;
+    border: 1px solid #eeebf4;
     border-radius: 10px;
-    background: var(--nathus-roxo-claro);
+    background: #fbfafc;
     color: #24132d;
     overflow-wrap: anywhere;
 }
@@ -706,11 +742,11 @@ button.vt-usuario {
 }
 
 .sol-foto-pacote {
-    object-fit: cover;
+    flex: 0 0 auto;
+    width: 162px;
+    height: 108px;
     border-radius: 8px;
-    width: clamp(84px, 16vw, 120px);
-    height: auto;
-    aspect-ratio: 3 / 2;
+    object-fit: cover;
 }
 
 .sol-pacote {
@@ -718,11 +754,38 @@ button.vt-usuario {
     min-width: 0;
 }
 
+.sol-evento {
+    color: #5d566c;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
 .sol-pacote ul {
     margin: 5px 0 0;
     padding-inline-start: 18px;
+    padding-right: 6px;
     font-size: 13px;
     line-height: 1.55;
+    max-height: calc(1.55em * 3);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #cdc4dd transparent;
+}
+
+.sol-pacote ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sol-pacote ul::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #cdc4dd;
+}
+
+.sol-pacote ul:focus-visible {
+    outline: 2px solid var(--nathus-roxo);
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 .sol-resposta {
@@ -752,6 +815,10 @@ button.vt-usuario {
     margin-top: 16px;
 }
 
+.sol-periodo .sol-local {
+    grid-column: 1 / -1;
+}
+
 .sol-periodo dt {
     gap: 8px;
 }
@@ -771,31 +838,21 @@ button.vt-usuario {
     margin-top: 4px;
 }
 
-.sol-detalhes {
-    margin-top: 16px;
-    border-top: 1px solid #eceaf2;
-    padding-top: 6px;
-}
-
-.sol-detalhes summary {
-    width: fit-content;
-    padding: 8px 0;
-    color: var(--ft02-roxo-intermediario);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.sol-detalhes dl {
-    margin: 4px 0 12px;
-}
-
-.sol-mensagem {
-    grid-column: 1 / -1;
-}
-
-.sol-mensagem dd {
+.sol-mensagem-card {
+    margin: 14px 0 0;
+    padding-left: 12px;
+    border-left: 3px solid #ddd2f1;
+    color: #3a3348;
+    font-size: 13.5px;
+    line-height: 1.5;
     white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.sol-envio {
+    margin: 12px 0 0;
+    color: #6d6784;
+    font-size: 12.5px;
 }
 
 .sol-status {
@@ -832,10 +889,13 @@ button.vt-usuario {
 }
 
 .sol-aviso {
-    background: #f6f4fa;
-    border-radius: 10px;
-    margin: 14px 0 0;
-    padding: 10px 12px;
+    margin: 12px 0 0;
+    padding-top: 10px;
+    border-top: 1px solid #eceaf2;
+    background: none;
+    border-radius: 0;
+    color: #6d6784;
+    font-size: 13px;
 }
 
 .sol-prazo {
@@ -855,7 +915,7 @@ button.vt-usuario {
     font-size: 13px;
 }
 
-.sol-prazo button {
+.sol-prazo-cancelar {
     background: #fff;
     border: 1px solid #e4b4b0;
     border-radius: 10px;
@@ -869,8 +929,81 @@ button.vt-usuario {
     white-space: nowrap;
 }
 
-.sol-prazo button:hover {
+.sol-prazo-cancelar:hover {
     background: #fde8e6;
+}
+
+.sol-dialogo {
+    position: fixed;
+    inset: 0;
+    width: min(100% - 32px, 420px);
+    margin: auto;
+    padding: 24px;
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    background: #fff;
+    color: #24132d;
+}
+
+.sol-dialogo::backdrop {
+    background: rgb(32 24 73 / 45%);
+}
+
+.sol-dialogo h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.sol-dialogo p {
+    margin: 0;
+    color: #40394b;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.sol-dialogo-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.sol-dialogo-acoes button {
+    border-radius: 8px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    min-height: 44px;
+    padding: 8px 16px;
+}
+
+.sol-dialogo-voltar {
+    border: 1px solid var(--borda);
+    background: #fff;
+    color: #3a3348;
+}
+
+.sol-dialogo-voltar:hover {
+    background: #f6f4fa;
+}
+
+.sol-dialogo-cancelar {
+    border: 1px solid #9d2c24;
+    background: #9d2c24;
+    color: #fff;
+}
+
+.sol-dialogo-cancelar:hover {
+    background: #86241d;
+}
+
+.sol-dialogo button:focus-visible,
+.sol-prazo-cancelar:focus-visible {
+    outline: 2px solid var(--nathus-roxo);
+    outline-offset: 2px;
 }
 
 .sol-vazia {
@@ -899,6 +1032,15 @@ button.vt-usuario {
     .sol-prazo {
         grid-template-columns: 1fr;
         display: grid;
+    }
+
+    .sol-foto-pacote {
+        width: 100%;
+        height: 170px;
+    }
+
+    .sol-pacote {
+        flex-basis: 100%;
     }
 }
 
@@ -1300,7 +1442,7 @@ a.pro-card:hover {
     }
 
     .vt-hero {
-        height: 360px;
+        height: 460px;
     }
 
     .vt-grade,

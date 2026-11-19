@@ -1,19 +1,22 @@
 @charset "UTF-8";
 
 .solicitacoes-pagina {
-    max-width: 1440px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 32px 24px 60px;
+    padding: 32px 24px 64px;
     display: grid;
     gap: 16px;
     color: var(--texto-escuro);
 }
 
 .solicitacoes-cabecalho {
+    margin-bottom: 16px;
+}
+
+.solicitacoes-titulo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
+    gap: 12px;
 }
 
 .solicitacoes-cabecalho h2 {
@@ -21,14 +24,21 @@
     font-weight: 600;
 }
 
+.solicitacoes-descricao {
+    margin-top: 4px;
+    color: #5d566c;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
 @media (max-width: 760px) {
     .solicitacoes-pagina {
-        padding: 20px 16px 34px;
+        padding: 24px 16px 32px;
     }
 }
 
 .solicitacoes-contagem {
-    padding: 3px 10px;
+    padding: 4px 12px;
     border-radius: var(--raio-selo-notificacao);
     background: var(--ft02-amarelo);
     color: var(--nathus-roxo-escuro);
@@ -55,6 +65,45 @@
     color: #5d566c;
     font-size: 14px;
     text-align: center;
+}
+
+.lista-vazia {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    padding: clamp(24px, 4vw, 40px) 20px;
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    background: #fbfafc;
+    text-align: center;
+}
+
+.lista-vazia p {
+    margin: 0;
+}
+
+.lista-vazia-titulo {
+    color: #24132d;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.lista-vazia-texto {
+    max-width: 46ch;
+    color: #5d566c;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.lista-vazia-acao {
+    margin-top: 8px;
+    color: var(--ft02-roxo-intermediario);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.lista-vazia-acao:hover {
+    text-decoration: underline;
 }
 
 .card-pendencia {
@@ -103,8 +152,7 @@
     font-weight: 600;
 }
 
-.card-pendencia-cliente,
-.card-pendencia-meta {
+.card-pendencia-cliente {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -120,28 +168,12 @@
     display: block;
 }
 
-.card-pendencia-meta {
-    flex-wrap: wrap;
-    gap: 4px 16px;
-    margin-top: 8px;
-    color: var(--texto-secundario);
-}
-
-.card-pendencia-meta > span {
-    align-items: flex-start;
-    gap: 8px;
-}
-
-.card-pendencia-meta > span::before {
-    margin-top: 2px;
-    background-color: var(--ft02-roxo-intermediario);
-}
-
 .card-pendencia-mensagem {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+    text-overflow: ellipsis;
     margin-top: 8px;
     color: var(--texto-secundario);
     font-size: 12px;
@@ -166,8 +198,7 @@
     display: block;
 }
 
-.card-pendencia-valor span,
-.card-pendencia-recebida {
+.card-pendencia-valor span {
     color: var(--texto-secundario);
     font-size: 11px;
 }
@@ -209,22 +240,249 @@
     mask: url("../../assets/seta_solicitacoes.svg") center / contain no-repeat;
 }
 
-.card-pendencia--resumo {
-    padding-block: 12px;
+/* Caixa de entrada (Solicitações) e Dashboard: sem bloco de data — o foco é
+   quem pediu, o que pediu e a resposta. A data continua na linha de
+   informações. */
+.card-pendencia--entrada {
+    grid-template-columns: minmax(0, 1fr);
 }
 
-.card-pendencia--resumo .card-pendencia-data {
-    min-height: 64px;
+.card-pendencia--entrada .card-pendencia-data {
+    display: none;
 }
 
-.card-pendencia--resumo .card-pendencia-data strong {
-    font-size: 19px;
+/* A foto do pacote entra no lugar onde a agenda mostra a data e acompanha a
+   altura do texto: nada pode ficar abaixo da linha de baixo dela. A imagem é
+   posicionada em absoluto para não esticar o card com a própria proporção. */
+.card-pendencia-foto {
+    position: relative;
+    align-self: stretch;
+    min-height: 96px;
+    overflow: hidden;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    background: #f4f2f8;
 }
 
-@media (min-width: 761px) {
-    .card-pendencia--resumo {
-        grid-template-columns: 80px minmax(0, 1fr) minmax(136px, auto);
+.card-pendencia-foto img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-pendencia--entrada.card-pendencia--com-foto {
+    grid-template-columns: 160px minmax(0, 1fr);
+}
+
+/* Agenda: as ações foram para dentro do card, então sobra a coluna da data.
+   A largura é a mesma da foto do pacote na caixa de entrada (160px). */
+.card-pendencia--servico {
+    grid-template-columns: 160px minmax(0, 1fr);
+}
+
+/* O bloco de data acompanha a altura do texto: a base dele é a linha em que o
+   rodapé termina, e nada fica abaixo dela. */
+.card-pendencia--servico .card-pendencia-data {
+    align-self: stretch;
+    align-content: center;
+}
+
+.card-pendencia--servico .card-pendencia-data strong {
+    font-size: 28px;
+}
+
+.card-pendencia--servico .card-pendencia-data small {
+    font-size: 13px;
+}
+
+/* O nome do mês por extenso é mais largo que o dia; como legenda menor, com um
+   pouco de entreletra, ele fica abaixo do dia sem competir com ele. */
+.card-pendencia--servico .card-pendencia-data > span small {
+    font-size: 11px;
+    letter-spacing: .06em;
+}
+
+/* Dashboard: leitura de relance. Ficam só a foto, o pacote, o cliente e a data
+   de recebimento — o card inteiro é um link para a leitura completa em
+   Solicitações, onde está o selo, os convidados e a ação de responder. */
+.card-pendencia--simples {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px 16px;
+    padding: 12px 16px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-pendencia--simples:hover {
+    border-color: #ddd2f1;
+    background: #fbfafd;
+}
+
+.card-pendencia--simples:focus-visible {
+    outline: 2px solid var(--nathus-roxo);
+    outline-offset: 2px;
+}
+
+.card-pendencia--simples .card-pendencia-foto {
+    align-self: center;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+}
+
+.card-pendencia--simples .card-pendencia-corpo h3 {
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.card-pendencia-simples-linha {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px 12px;
+}
+
+.card-pendencia-simples-linha .card-pendencia-registro {
+    color: var(--texto-secundario);
+    font-size: 12px;
+}
+
+.card-pendencia-seta {
+    align-self: center;
+    flex: 0 0 8px;
+    width: 8px;
+    height: 12px;
+    background-color: var(--texto-suave);
+    mask: url("../../assets/seta_solicitacoes.svg") center / contain no-repeat;
+}
+
+/* Solicitações e Meus Serviços compartilham a mesma estrutura: os rótulos com
+   ícone sobem para a linha do selo e o rodapé junta o cliente e a ação,
+   colados na base da foto (ou do bloco de data). */
+.card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-corpo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* O espaçamento do bloco vem do `gap` do corpo: as margens próprias dos
+   filhos sairiam da escala (12 + 8 = 20px). */
+.card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-etiqueta,
+.card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-corpo h3,
+.card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-mensagem {
+    margin: 0;
+}
+
+.card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-registro {
+    margin-left: auto;
+}
+
+/* O cliente é o dado principal do rodapé: foto e nome maiores, para reconhecer
+   quem pediu antes de ler o resto. */
+.card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-cliente {
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-cliente .avatar-cliente-card {
+    width: 36px;
+    height: 36px;
+}
+
+.card-pendencia-rodape {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px 16px;
+    margin-top: auto;
+}
+
+/* O nome do cliente e a mensagem formam um bloco só: a mensagem fica embaixo
+   do nome, e o bloco inteiro encosta na base do card. A base de 200px evita
+   que o bloco e as ações quebrem para duas linhas antes de o texto encolher. */
+.card-pendencia-rodape-cliente {
+    display: grid;
+    flex: 1 1 200px;
+    gap: 8px;
+    min-width: 0;
+}
+
+.card-pendencia-rodape-cliente .card-pendencia-mensagem {
+    margin-top: 0;
+}
+
+.card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-acoes {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Janela com a sidebar aberta e o card estreito: valor e botão empilham à
+   direita, para o nome do cliente continuar na mesma linha que eles. */
+@media (min-width: 761px) and (max-width: 839px) {
+    .card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-acoes {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 8px;
     }
+}
+
+.card-pendencia-etiqueta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 12px;
+    margin-bottom: 8px;
+    color: var(--texto-secundario);
+    font-size: 11px;
+}
+
+.card-pendencia-selo {
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.card-pendencia-selo--pendente {
+    background: #fff4d8;
+    color: #8a5a00;
+}
+
+.card-pendencia-selo--confirmado {
+    background: #e5f7ea;
+    color: #1d7a3a;
+}
+
+/* Agenda (Meus Serviços): o bloco de data fica mais leve que o roxo cheio, mas
+   não fica vazio como só-contorno — um lilás bem claro dá corpo ao bloco sem
+   competir com o pacote. */
+.card-pendencia--servico .card-pendencia-data {
+    background: #f7f4fd;
+}
+
+.card-pendencia-dias {
+    margin-top: 2px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.2;
+    opacity: .9;
+}
+
+.card-pendencia--servico .card-pendencia-detalhes {
+    border: 1px solid var(--borda);
+    background: var(--branco);
+    color: var(--ft02-roxo-intermediario);
+}
+
+.card-pendencia--servico .card-pendencia-detalhes:hover {
+    background: var(--nathus-roxo-claro);
 }
 
 @media (min-width: 1200px) {
@@ -239,6 +497,21 @@
         column-gap: 12px;
     }
 
+    /* A agenda acompanha a largura da foto do pacote também no celular. */
+    .card-pendencia--servico {
+        grid-template-columns: 96px minmax(0, 1fr);
+    }
+
+    /* No celular o bloco de data não estica: o card é alto demais e sobraria
+       uma faixa roxa de 96×300. */
+    .card-pendencia--servico .card-pendencia-data {
+        align-self: center;
+    }
+
+    .card-pendencia-mensagem {
+        -webkit-line-clamp: 2;
+    }
+
     .card-pendencia-data {
         min-height: 74px;
     }
@@ -247,18 +520,48 @@
         font-size: 19px;
     }
 
-    .card-pendencia-acoes {
-        grid-column: 1 / -1;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 12px;
-        border-top: 1px solid var(--borda);
-        text-align: left;
+    .card-pendencia--entrada {
+        grid-template-columns: minmax(0, 1fr);
     }
 
-    .card-pendencia-recebida {
-        flex-basis: 100%;
+    .card-pendencia--entrada.card-pendencia--com-foto {
+        grid-template-columns: 96px minmax(0, 1fr);
+        row-gap: 12px;
+    }
+
+    /* No celular o card fica alto demais para a foto acompanhar a altura do
+       texto: ela volta à proporção 4:3 e o rodapé empilha. */
+    .card-pendencia--entrada .card-pendencia-foto {
+        align-self: start;
+        aspect-ratio: 4 / 3;
+        min-height: 0;
+    }
+
+    /* No celular o horário sairia numa linha própria, só para ele: fica só a
+       data, que cabe ao lado dos convidados. O horário continua no detalhe. */
+    .card-pendencia-data-horas {
+        display: none;
+    }
+
+    .card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-acoes {
+        flex-wrap: wrap;
+    }
+
+    /* Na coluna estreita do celular o registro quase sempre cai numa linha
+       própria; o empurrão para a direita (que serve quando ele divide a linha
+       com o selo) só deixaria a linha desalinhada do resto. */
+    .card-pendencia:is(.card-pendencia--entrada, .card-pendencia--servico) .card-pendencia-registro {
+        margin-left: 0;
+    }
+
+    .card-pendencia--servico .card-pendencia-data strong {
+        font-size: 22px;
+    }
+
+    /* O card do Dashboard mantém a coluna da seta também no celular: sem ela o
+       terceiro filho do grid cairia numa linha própria. */
+    .card-pendencia--simples {
+        grid-template-columns: 56px minmax(0, 1fr) auto;
+        padding: 10px 12px;
     }
 }

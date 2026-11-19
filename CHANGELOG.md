@@ -1,5 +1,295 @@
     # CHANGELOG
 
+## 2026-11-18 - Cards de solicitação x serviço e página do cliente
+
+- O card compartilhado (`Includes/card-solicitacao.php`) agora tem duas leituras:
+  - **Solicitações (caixa de entrada):** sem o bloco de data à esquerda (a data continua na
+    linha de informações), com o selo "Aguardando resposta" e a linha "Recebida em" no topo do
+    card, e a ação principal "Ver e responder".
+  - **Meus Serviços (agenda):** o bloco de data ficou roxo sólido, com a contagem ("faltam N
+    dias", "é hoje", "amanhã"), o selo "Confirmado", "Confirmado em" no topo e a ação
+    secundária "Ver serviço". O Dashboard mantém o resumo compacto de antes.
+- `Servicos/servicos.php` trocou o título "Serviços aceitos" por **"Serviços confirmados"**, com
+  a contagem ao lado (mesmo selo usado nas Solicitações).
+- Na página do cliente (`home/minhas-solicitacoes.php`), o card deixa de esconder informação no
+  `<details>`: o tipo de evento aparece sob o título do pacote, o local entrou na lista de
+  período (ocupando a linha inteira), a mensagem enviada virou um parágrafo de até 2 linhas e
+  "Enviada em" ficou como rodapé. O aviso de prazo encerrado perdeu a caixa e ficou só uma linha
+  discreta.
+- `.sol-lista` ganhou `grid-template-columns: minmax(0, 1fr)`: uma mensagem longa sem espaços
+  esticava a coluna do grid e o card inteiro passava de 4.000px de largura em telas grandes.
+- CSS morto removido: `.card-pendencia-recebida` (card e `Servicos/CSS/servicos.css`) e
+  `.sol-detalhes` / `.sol-mensagem`.
+- O resumo do pacote no card do cliente perdeu o fundo lavanda: agora é um painel neutro
+  (`#fbfafc` com borda), que separa o pacote do resto do card sem puxar cor.
+- A foto do pacote ficou com caixa fixa: **120×80** no desktop e **96×64** até 560px, com
+  `object-fit: cover`. Antes a altura seguia a proporção do arquivo, então uma foto quadrada e
+  uma panorâmica não ocupavam o mesmo espaço.
+- O pedido demo da Locação Diurna (id 1) tinha `nome_evento` igual ao título do pacote e por
+  isso perdia a linha "Tipo de evento", ficando 20px mais baixo que os outros cards. O dado
+  virou "Aniversário de 15 anos" e todos os cards do cliente ficaram com a mesma altura de
+  resumo.
+- A mensagem enviada quebra linha de verdade: `overflow-wrap: anywhere` (uma palavra de 500
+  caracteres sem espaço não vaza mais do card) e `white-space: pre-wrap` (preserva as quebras de
+  linha digitadas no campo). O limite de 2 linhas saiu, então a mensagem inteira aparece, como
+  antes no `<details>`.
+- A foto do pacote cresceu para **162×108** no desktop e virou faixa de **170px de altura** (com
+  a coluna de texto embaixo) até 560px. A lista do plano agora mostra **3 linhas** e rola quando
+  o pacote tem mais itens: todos os itens são enviados pela página (antes o PHP cortava em 3) e
+  a área recebe `tabindex`/rótulo quando há rolagem, para funcionar também pelo teclado.
+- O cancelamento da solicitação não usa mais o `confirm()` do navegador. O botão abre um
+  `<dialog>` nativo com título "Cancelar solicitação?", o aviso de que a ação não pode ser
+  desfeita e os botões "Voltar" (foco inicial) e "Cancelar solicitação" (vermelho). É o mesmo
+  padrão já usado em `Servicos/acoes-detalhe.php`; Esc fecha e o foco fica preso no diálogo.
+
+### Painel do promotor: caixa de entrada x agenda
+
+- Cada uma das duas páginas passou a dizer o que faz, sem depender do rótulo da sidebar:
+  - **Solicitações** → título **"Aguardando resposta"** e a linha *"Pedidos que chegaram e você
+    ainda não respondeu."*
+  - **Meus Serviços** → título **"Serviços confirmados"** e a linha *"Seus compromissos, com o
+    próximo evento no topo."*
+- O selo de contagem agora fica dentro do título e tem rótulo acessível ("2 solicitações
+  aguardando resposta", "1 serviço confirmado"). Ele some quando a lista está vazia: um "0" ao
+  lado de um título não ajuda ninguém.
+- Cada lista ganhou um vazio próprio (`.lista-vazia`), em vez da linha solta de antes:
+  - Solicitações: "Nenhuma solicitação aguardando resposta" + "Quando um cliente enviar um
+    pedido, ele aparece aqui."
+  - Meus Serviços: "Nenhum serviço confirmado" + "Aceite uma solicitação para o evento entrar na
+    sua agenda." + link **"Ver solicitações pendentes"**, que leva direto à caixa de entrada.
+- `Servicos/servicos.php` deixou de ordenar por data de recebimento e agora ordena por **data do
+  evento**: próximos eventos primeiro, depois os passados (do mais recente para o mais antigo) e
+  por fim as datas que não dá para ler. A agenda começa pelo compromisso mais próximo.
+- O cabeçalho virou um bloco de duas linhas (`.solicitacoes-titulo` + `.solicitacoes-descricao`)
+  no CSS compartilhado; o Dashboard continua usando o resumo compacto, sem mudança.
+- Revisão automática (Better Design) nas duas telas: `check-comprehension` passou nas duas, e
+  `inspect-spacing` mediu 1440, 1728 e 390 px até chegar a **100 nas duas**. O que a medição
+  apontou e foi corrigido:
+  - Em telas estreitas a prévia da mensagem no card ficava presa em 1 linha e cortava o texto:
+    até 760px ela mostra **2 linhas** (o desktop segue com 1).
+  - Espaçamentos fora da escala do projeto (6, 10, 18 px) foram para 8, 12, 16 px: gap do
+    título, margem do cabeçalho, etiqueta do card, selo de contagem e bloco vazio.
+  - A página da agenda usava 28px de padding lateral no desktop e a de solicitações 24px; as
+    duas agora usam **24px**, e o rodapé da página foi de 60 para 64px.
+
+### Foto do pacote na caixa de entrada
+
+- O card de solicitação pendente passou a mostrar a **foto do pacote**, no mesmo lugar em que a
+  agenda mostra o bloco de data: **160px de largura** no desktop, com cantos de 10px e
+  `object-fit: cover`, e **96×72** no celular. Serve para reconhecer o pedido de relance, sem
+  precisar ler o título.
+- A consulta de `Includes/solicitacoes-pendentes.php` passou a trazer `pacote.imagem`, resolvendo
+  o pacote por `pacote_id` e, quando ele falta, pelo nome em `pacote_selecionado` — a mesma regra
+  que a página do cliente já usava. Pedido sem pacote localizado (ou pacote sem foto) não gera
+  coluna vazia: o card volta ao layout de duas colunas.
+- O card da caixa de entrada **não mostra mais a prévia da mensagem**: com a foto ocupando a
+  esquerda e a ação à direita, o texto ficaria espremido. A mensagem continua no card da agenda e
+  na página de detalhe, atrás de "Ver e responder".
+- No card da caixa de entrada a ação deixou de ser uma terceira coluna: ela foi para dentro do
+  card, junto do nome do cliente (`.card-pendencia-rodape`). Antes, com 140px de foto, a coluna de
+  texto caía para ~97px em telas intermediárias; agora foto e texto dividem a largura e o rodapé
+  usa a linha inteira.
+- Dashboard, agenda e página de detalhe continuam iguais: a foto é exclusiva da caixa de entrada.
+
+### Linha do selo e rodapé do card de solicitação
+
+- A linha do topo da caixa de entrada passou a ser **selo → data e horário → convidados →
+  "Recebida em …"**, com o registro empurrado para a direita (`margin-left: auto`). Assim o que
+  identifica o pedido (quando e para quantas pessoas) fica ao lado de "Aguardando resposta", e o
+  carimbo de chegada vira o dado menos importante da linha, encostado na borda.
+- A cidade saiu desse card: o promotor já vê o endereço no detalhe, e ali ela só competia com a
+  data e os convidados. Na agenda o local continua.
+- O nome do cliente e a ação ficam no rodapé, e o rodapé fecha exatamente na **linha de baixo da
+  foto do pacote**: a foto acompanha a altura do texto (`align-self: stretch`, imagem em
+  `position: absolute` para não esticar o card com a própria proporção) e o rodapé é empurrado
+  para a base (`margin-top: auto`). Medido a 1440px: base da foto, do avatar e do botão em 130px,
+  e nenhum elemento do card abaixo dessa linha.
+- A foto de perfil foi para **36px** e o nome para **16px** (antes 24px e 13px). O rodapé usa
+  `align-items: flex-end`, então a base do avatar, a do valor e a do botão caem na mesma linha —
+  antes o avatar ficava centralizado num rodapé de 44px e sobrava 2px de cada lado.
+- Entre 761 e 1099px o rodapé passou a ocupar a largura toda do card (começa embaixo da foto),
+  porque a coluna de texto ao lado de uma foto de 160px não cabia o nome e o botão juntos. Entre
+  761 e 839px o "Valor no envio" e o botão empilham à direita, para o nome continuar na mesma
+  linha deles e na base da foto.
+- No celular (até 760px) a foto volta à proporção 4:3 (96×72) e o rodapé empilha — numa tela de
+  390px não há largura para nome, valor e botão na mesma linha. Ali a foto não acompanha mais a
+  altura do texto: alongá-la até a base deixaria uma tira de 96×280.
+- No celular o bloco de ações da caixa de entrada não recebe mais a borda superior e o
+  `padding-top` que eram do layout antigo (quando a ação era a última linha do grid do card):
+  dentro do rodapé isso desalinhava o botão em 6px.
+- Espaçamento entre selo, título do pacote e cliente subiu de 8 para **12px**, e o rodapé usa
+  `gap: 12px 16px` com quebra para duas linhas em telas estreitas.
+- O gap entre ícone e rótulo (data, convidados, local, mensagem) foi de 6 para **8px**, dentro da
+  escala de 4/8/12/16/24/32/48/64/96/128 do projeto.
+- O ícone de convidados deixou de ser roxo e passou a usar `currentColor`, a mesma cor do ícone de
+  data — no card da caixa de entrada os dois ficam cinza, junto do texto do rótulo. Só o ícone de
+  mensagem continua roxo.
+- `inspect-spacing` voltou a **100** em 1440, 1728 e 390 px, nas duas telas (caixa de entrada e
+  agenda), sem clipping e sem espaçamento fora de escala.
+
+### Meus Serviços com a mesma estrutura da caixa de entrada
+
+- A agenda passou a usar o mesmo desenho de card de Solicitações: os rótulos com ícone (data do
+  evento e convidados) subiram para a **linha do selo**, ao lado de "Confirmado", com
+  "Confirmado em …" empurrado para a direita. O bloco `.card-pendencia-meta` deixou de existir
+  nesse card e a **cidade saiu** (continua na página de detalhe).
+- O nome do cliente e a ação foram para o mesmo rodapé de duas pontas, e o bloco de data roxo
+  acompanha a altura do texto (`align-self: stretch` + `align-content: center`): a base da data,
+  a do avatar e a do botão "Ver serviço" caem na mesma linha, e nada do card fica abaixo dela.
+  Medido a 1440px: as três em 161px.
+- O dia e o mês da data cresceram: **23 → 28px** o dia e **12 → 13px** o mês (**22px** no
+  celular). O "faltam N dias" continua abaixo.
+- A foto de perfil subiu para **36px** e o nome para **16px**, iguais aos da caixa de entrada.
+- Em `Servicos/CSS/servicos.css` saíram as regras que faziam das ações uma coluna esticada à
+  direita (valor no topo, botão no pé) — herança da época em que elas eram a terceira coluna do
+  grid. Sem elas, o valor e o botão ficam na mesma linha, dentro do rodapé.
+- O corpo do card virou uma coluna flex com `gap: 12px` e as margens próprias de etiqueta, título
+  e mensagem foram zeradas: antes o título somava 12px de margem com 8px da mensagem, resultando
+  em 20px entre um e outra. Agora selo → título → mensagem → rodapé ficam todos a 12px.
+- No celular o rodapé empilha (nome em cima, valor e botão embaixo), como na caixa de entrada.
+- O bloco de data da esquerda passou a ter a **mesma largura da foto do pacote** na caixa de
+  entrada: **160px** (era 104px) e **96px** no celular. Como nos dois casos o bloco estica até a
+  base do card, as duas telas ficam com a mesma coluna à esquerda — a 1440px, 160×132 na agenda e
+  160×113 em Solicitações (a diferença de altura vem do texto de cada card).
+- A mensagem do cliente saiu de entre o título e o rodapé: agora fica **embaixo do nome**, dentro
+  do rodapé, formando um bloco com o cliente que também encosta na base do card. O card encolheu
+  de 178 para **166px** a 1440px e a linha de base continua fechada (data, mensagem e botão em
+  149px). O bloco do nome usa `flex: 1 1 200px`, então entre 761 e 840px ele encolhe em vez de
+  jogar as ações para outra linha.
+- `inspect-spacing`: **100** nas duas telas, em 1440, 1728 e 390 px.
+
+### Mesmo card no Dashboard, data transparente e reticências na mensagem
+
+- O card da seção **"Solicitações pendentes" do Dashboard** chegou a ser o mesmo da caixa de
+  entrada (foto de 160px, selo, convidados, "Recebida em", título e rodapé com cliente e ação).
+  **Na revisão seguinte ele virou o card simples** descrito acima — o desenho completo ficou só
+  em Solicitações.
+- O layout antigo do Dashboard (a variante `--resumo`, com bloco de data de 80px e a linha de
+  informações embaixo) saiu do código: `$resumo_dashboard`, as regras `.card-pendencia--resumo`,
+  o ramo `else` do card e as variáveis que só ele usava (`$periodo`, `$cidade`, `$horario`) foram
+  removidos. Desde então o desenho de cada tela é escolhido pelo `$layout_card` da página que
+  inclui o card.
+- Na agenda, o **bloco de data** deixou o roxo cheio com texto branco: passou por um "só contorno"
+  e ficou num **lilás bem claro** (`#f7f4fd`, com a borda `#ddd2f1` e o texto em roxo escuro) —
+  dá corpo ao bloco sem competir com o pacote. Como o bloco acompanha a altura do card, a linha de
+  base do rodapé não mudou (149px a 1440px).
+- O **mês saiu da abreviação e virou o nome por extenso** no bloco de data da agenda
+  ("05" + "DEZEMBRO", antes "05" + "DEZ"). Como o nome por extenso é mais largo que o dia, ele
+  virou legenda: **11px com entreletra de .06em**, abaixo do dia de 28px (22px no celular). A 1440px
+  o conteúdo do bloco tem 64px numa caixa de 160px; a 390px, 64px numa caixa de 96px — sem quebra
+  e sem estouro. O Dashboard continua com a abreviação ("5 dez"), porque ali a caixa do dia tem só
+  64px.
+- A **mensagem do cliente na agenda corta com reticências** quando passa de uma linha no desktop
+  (duas no celular), e o texto completo aparece no `title` ao passar o mouse.
+- Correção de layout: entre 761 e 1099px o rodapé era esticado com `margin-left` negativo para
+  ocupar a largura toda do card. Como o bloco da esquerda (foto ou data) acompanha a altura toda,
+  o nome do cliente e a mensagem ficavam **por cima dele**. A regra saiu: o rodapé volta a viver
+  dentro da própria coluna e só quebra para uma segunda linha quando falta espaço (medido em 761,
+  790, 823, 900, 1000, 1100 e 1728px, sem sobreposição e sem estouro do card).
+- No celular o "Recebida em"/"Confirmado em" deixou de ser empurrado para a direita quando cai
+  numa linha própria — o empurrão só faz sentido quando ele divide a linha com o selo, e sozinho
+  ele deixava a linha desalinhada do resto do card. Isso zerou o achado
+  `spacing/leading-edge-drift` que aparecia no card do Dashboard a 390px.
+- `inspect-spacing`: **100** na agenda, no painel do Dashboard e nas telas de Solicitações, em
+  1440, 1728, 1000, 823 e 390 px. A única ressalva é o corte da mensagem da agenda, que o inspetor
+  lê como "clips vertical content" — é a truncagem pedida, com o texto integral disponível no
+  `title` e na página de detalhe.
+
+### Card simples no Dashboard e Próximos Serviços só com a data
+
+- A seção **"Solicitações pendentes" do Dashboard** passou a mostrar um card **enxuto**, de
+  relance: miniatura do pacote (72px, 56px no celular), nome do pacote, cliente com avatar e
+  "Recebida em ...". Saíram o selo "Aguardando resposta", os convidados e o botão "Ver e
+  responder". O **card inteiro é um link** para a página de Solicitações, onde está a leitura
+  completa (selo, convidados, valor e a ação de responder) — o grid do card simples é
+  `foto | texto | seta`, com a seta discreta à direita indicando o clique.
+- O Dashboard passou a ter **três desenhos** de card, escolhidos pelo `$layout_card`:
+  `solicitacoes` (leitura completa, com foto), `servicos` (agenda, com o bloco de data) e
+  `dashboard` (o card simples). As variáveis `$card_entrada` e `$card_simples` são mutuamente
+  exclusivas, e o `--simples` define o próprio grid no desktop e no celular (onde sem a coluna da
+  seta o terceiro filho do grid cairia numa linha própria).
+- Em **"Próximos Serviços"** saíram a **localização** e a **linha com a data/período** embaixo:
+  ficou só o bloco de data (dia + mês) à esquerda, o pacote e o cliente. Com isso o
+  `.proximo-meta` e as regras dele em `Dashboard/css/dashboard.css` foram removidos, junto com a
+  função `data_curta_agenda()` e as variáveis `$periodo`, `$termino` e `$local`, que só serviam
+  para montar essas linhas (o local continua na página de Meus Serviços e no detalhe).
+- Cada item de **"Próximos Serviços"** ganhou **borda própria** (1px, raio de 8px) em vez do
+  fio que só separava um item do outro: os cards ficam soltos, com 8px de folga entre eles
+  (`.proximos-lista` virou grid com `align-content: start`, para um único item não esticar até a
+  altura reservada da lista). No hover o fundo clareia e a borda fica lilás.
+- Medido a 1440px: o card simples do Dashboard tem **1039×80** (antes 1020×147) e o item de
+  Próximos Serviços, 484×80. Sem estouro nem sobreposição em 1728, 1440, 1100, 900, 700 e 390px.
+- `inspect-spacing`: **100** no painel do Dashboard (1440 e 390px) e nas telas de Solicitações e
+  Meus Serviços. A única ressalva continua sendo o corte da mensagem da agenda, que o inspetor lê
+  como "clips vertical content" — é a truncagem pedida, com o texto integral no `title` e no
+  detalhe.
+
+### Data do evento de volta na caixa de entrada e ícone de "Tipo de festa"
+
+- A **data do evento voltou para a linha do selo** no card de Solicitações, ao lado dos
+  convidados (`label--data`), na ordem anterior: selo → data → convidados → "Recebida em". O card
+  da caixa de entrada não tem bloco de data, então sem essa linha o promotor só sabia a data da
+  festa abrindo o detalhe.
+- De 761px para cima a data leva o horário ("28/11/2026 · 19:00 às 01:00"). Até 760px o horário
+  sai (`.card-pendencia-data-horas`, `display: none`): na coluna de 218px do celular ele gastaria
+  uma linha inteira, e com a data seca ela cabe ao lado dos convidados — a etiqueta fica com 3
+  linhas em vez de 4 (62px de altura e card 358×289, antes 82px e 309).
+- Medido: a 1440px a linha do selo fecha em 22px e o card mantém **1092×147**, com a foto e o
+  rodapé na mesma base (130px); a 760px tudo cabe numa linha; a 390px fica selo / data +
+  convidados / "Recebida em", sem estouro horizontal.
+- "Tipo de festa" ganhou ícone — era o único `dt` do detalhe sem um. A classe `label--tipo` usa
+  `assets/tipo_festa_solicitacoes.svg`, um **bolo** (silhueta cheia 24×24, ~43% de tinta, contra
+  21% de um confete que sumia a 14px), na mesma receita dos outros: `mask` de 14px com
+  `background: currentColor`.
+- O mesmo ícone entrou no rótulo do formulário do cliente: o `:is(...)` de
+  `Cliente/css/solicitacao.css` e as duas listas de `Includes/css/icones-solicitacao.css` passaram
+  a incluir `.label--tipo`, então o campo fica ao lado de data, horário, local, convidados e
+  mensagem, com o mesmo ícone de 14px.
+- `inspect-spacing`: **100** na caixa de entrada (1440 e 390px). No detalhe os achados são
+  anteriores a esta mudança (o link "Voltar para solicitações" e os contatos medem menos de 44px
+  de altura, e o grid do painel usa valores fora da escala).
+
+### Foto do pacote no detalhe: mesmo quadro do card
+
+- O **recorte do promotor já está no arquivo**: o editor de enquadramento do perfil grava o pacote
+  em 16:9 e o upload mantém a proporção (os envios recentes estão em 900×507, e as fotos demo, em
+  900×900). Todas as telas leem o mesmo `pacote.imagem` — o recorte nunca se perdeu no caminho.
+- O desencontro era o **quadro**: o detalhe usava `aspect-ratio: 16/9` e o card da lista, ~4:3.
+  Num arquivo quadrado, o detalhe mostrava só **56% da altura** e o card, **71%** — daí a impressão
+  de que o detalhe não respeitava o recorte.
+- `.sol-detalhe-pacote-foto` passou a usar **`aspect-ratio: 4/3`**, o mesmo quadro do card (e do
+  card simples do Dashboard): **421×316** a 1440px e **324×243** a 390px. Num arquivo quadrado, o
+  detalhe agora mostra **75%** da altura contra os 71% do card; num upload 16:9, mostra 75% da
+  largura contra os 79% do card — ou seja, o detalhe nunca corta mais que a lista.
+- Vale para os dois detalhes de uma vez, porque Solicitações e Meus Serviços usam o mesmo
+  `Includes/detalhe-solicitacao.php`.
+
+### Ícone ativo da sidebar mais fino
+
+- O ícone do item ativo da sidebar não engorda mais: o `stroke-width` caiu de **2.5 para 2** (o
+  normal é 1.75). O item ativo continua se distinguindo pelo fundo branco, pela pastilha lilás e
+  pelo texto em 600 — com 2.5 o ícone ficava mais grosso que todos os outros e chamava mais
+  atenção que o próprio rótulo.
+
+### Amarelo da marca na página Minha Assinatura
+
+- O cartão do plano em uso continua **branco**, com um degradê amarelo discreto de ponta a ponta:
+  8% de `--ft02-amarelo` no topo (`rgb(254, 249, 235)`) caindo para 2% na base
+  (`rgb(255, 254, 250)`), sem paradas em branco puro no meio. A borda ficou num dourado suave
+  (55% amarelo + 45% `--borda`) em vez do lilás `#cfc4e3`.
+- O selo "Plano atual" passou a ser amarelo com texto `--ft02-roxo-escuro`, e o valor de "Plano
+  atual" no resumo virou o mesmo par (`.chip-plano`): fundo amarelo, texto roxo. É o único par de
+  amarelo com contraste de sobra (9,2:1).
+- `.botao-plano` ("Mudar para este plano") mantém o texto branco sobre o amarelo, por pedido. O
+  par fica em **1,8:1**, abaixo do mínimo de 4,5:1 do WCAG AA; o par com contraste folgado continua
+  sendo amarelo + roxo (9,2:1), usado no selo e no chip do resumo.
+- O anel amarelo em volta da foto do resumo saiu: era decoração sem função.
+- Um cartão inteiro em roxo sólido foi testado como alternativa e descartado: pesava mais que o
+  próprio conteúdo da página. O degradê mantém o cartão claro e ainda marca o plano em uso.
+- Medido a 1440px e a 390px: cartões em **532×334** no desktop e **358** de largura no celular,
+  sem rolagem horizontal; chip em **62×27**, dentro da linha de dados; selo a 17px da borda
+  interna do cartão.
+
 ## 2026-11-17 - Raiz do repositorio limpa
 
 - `cadastro-direita-original.png` (1,21 MB) e `design-ontology.json` (4 KB) saíram do

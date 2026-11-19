@@ -53,15 +53,23 @@ $solicitacoes = solicitacoes_pendentes($conexao, $id_promotor_logado);
                     <?php endif; ?>
                 <?php endif; ?>
 
-                <section aria-labelledby="solicitacoes-pendentes">
+                <section aria-labelledby="solicitacoes-aguardando">
                     <header class="solicitacoes-cabecalho">
-                        <h2 id="solicitacoes-pendentes">Pendentes</h2>
-                        <span class="solicitacoes-contagem"><?= count($solicitacoes) ?></span>
+                        <div class="solicitacoes-titulo">
+                            <h2 id="solicitacoes-aguardando">Aguardando resposta</h2>
+                            <?php if (count($solicitacoes) > 0): ?>
+                                <span class="solicitacoes-contagem" aria-label="<?= count($solicitacoes) === 1 ? '1 solicitação aguardando resposta' : count($solicitacoes) . ' solicitações aguardando resposta' ?>"><?= count($solicitacoes) ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <p class="solicitacoes-descricao">Pedidos que chegaram e você ainda não respondeu.</p>
                     </header>
 
                     <div class="lista-cards-solicitacao">
                         <?php if (!$solicitacoes): ?>
-                            <p class="solicitacoes-vazio">Nenhuma solicitação pendente no momento.</p>
+                            <div class="lista-vazia">
+                                <p class="lista-vazia-titulo">Nenhuma solicitação aguardando resposta</p>
+                                <p class="lista-vazia-texto">Quando um cliente enviar um pedido, ele aparece aqui.</p>
+                            </div>
                         <?php else: ?>
                             <?php foreach ($solicitacoes as $solicitacao): ?>
                                 <?php include __DIR__ . '/../Includes/card-solicitacao.php'; ?>

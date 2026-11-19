@@ -2,7 +2,7 @@
 
 .assinatura-pagina {
     --assinatura-grafite: #202026;
-    max-width: 1480px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 24px clamp(16px, 2.5vw, 36px) 48px;
     display: flex;
@@ -105,6 +105,15 @@
     font-size: 15px;
 }
 
+/* Plano em uso no resumo: amarelo com texto roxo (9,2:1), como os selos. */
+.chip-plano {
+    display: inline-block;
+    background: var(--ft02-amarelo);
+    color: var(--ft02-roxo-escuro);
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
 .status-ativo {
     color: #17803d;
 }
@@ -127,7 +136,14 @@
 }
 
 .plano-cartao.atual {
-    border-color: #cfc4e3;
+    /* Branco com o amarelo em degradê no topo do cartão do plano em uso. */
+    border-color: color-mix(in srgb, var(--ft02-amarelo) 55%, var(--borda));
+    background:
+        linear-gradient(
+            180deg,
+            color-mix(in srgb, var(--ft02-amarelo) 8%, var(--branco)) 0%,
+            color-mix(in srgb, var(--ft02-amarelo) 2%, var(--branco)) 100%
+        );
 }
 
 .plano-cabecalho {
@@ -139,8 +155,8 @@
 }
 
 .selo-atual {
-    background: var(--nathus-roxo-claro);
-    color: var(--ft02-roxo-intermediario);
+    background: var(--ft02-amarelo);
+    color: var(--nathus-roxo-escuro);
     font-size: 12px;
     font-weight: 600;
     padding: 4px 8px;

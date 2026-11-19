@@ -11,7 +11,7 @@ body.vt.perfil-publico {
 
 .pagina {
     --margem-perfil: clamp(16px, 2.5vw, 36px);
-    width: min(1408px, calc(100% - 2 * var(--margem-perfil)));
+    width: min(1240px, calc(100% - 2 * var(--margem-perfil)));
     margin-inline: auto;
     padding-block: 28px 48px;
     display: flex;
@@ -284,8 +284,22 @@ button.abrir-foto {
 
 .grade-pacotes {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 360px));
+    justify-content: start;
     gap: 16px;
+}
+
+/* Ponto de consulta no cartão que envolve a grade: quando só cabe uma coluna,
+   os cards passam a ficar centralizados em vez de encostados à esquerda. */
+.card:has(> .grade-pacotes) {
+    container-type: inline-size;
+    container-name: pacotes;
+}
+
+@container pacotes (max-width: 735px) {
+    .grade-pacotes {
+        justify-content: center;
+    }
 }
 
 .card-pacote {

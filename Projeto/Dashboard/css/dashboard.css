@@ -30,7 +30,7 @@ a {
    ============================================================ */
 
 .painel-conteudo {
-    max-width: 1480px;
+    max-width: 1280px;
     margin-inline: auto;
     padding: 24px clamp(16px, 2.5vw, 36px);
     display: flex;
@@ -133,6 +133,7 @@ a {
     gap: 12px;
     min-block-size: var(--proximo-item-altura);
     padding: 8px 12px;
+    border: 1px solid var(--painel-borda);
     border-radius: 8px;
     color: var(--painel-preto);
     text-decoration: none;
@@ -140,6 +141,7 @@ a {
 }
 
 .proximo-item:hover {
+    border-color: #ddd2f1;
     background: #f8f6fc;
 }
 
@@ -154,10 +156,6 @@ a {
         gap: 8px;
         padding-inline: 12px;
     }
-}
-
-.proximo-item + .proximo-item {
-    border-top: 1px solid var(--painel-borda);
 }
 
 .lista-vazia {
@@ -245,6 +243,9 @@ a {
 
 .proximos-lista {
     --proximo-item-altura: 80px;
+    display: grid;
+    align-content: start;
+    gap: 8px;
     min-block-size: calc(var(--proximo-item-altura) * 3);
 }
 
@@ -300,26 +301,6 @@ a {
 
 .proximo-cliente .avatar-cliente-card img {
     display: block;
-}
-
-.proximo-meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 4px 12px;
-    margin-top: 4px;
-    font-size: 12px;
-    color: var(--painel-preto);
-}
-
-.proximo-meta > span {
-    align-items: flex-start;
-    gap: 4px;
-}
-
-.proximo-meta > span::before {
-    margin-top: 2px;
-    background-color: var(--ft02-roxo-intermediario);
 }
 
 .proximo-seta {

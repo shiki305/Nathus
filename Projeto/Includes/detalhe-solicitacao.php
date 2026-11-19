@@ -124,7 +124,7 @@ $registro = strtotime((string) ($detalhe_servico ? ($dados["respondida_em"] ?? "
                     <?php endif; ?>
 
                     <?php if ($evento !== "" && $evento !== $titulo): ?>
-                        <div><dt>Tipo de festa</dt><dd><?= htmlspecialchars($evento) ?></dd></div>
+                        <div><dt class="label--tipo">Tipo de festa</dt><dd><?= htmlspecialchars($evento) ?></dd></div>
                     <?php endif; ?>
                     <div>
                         <dt class="label--convidados">Número de convidados</dt>

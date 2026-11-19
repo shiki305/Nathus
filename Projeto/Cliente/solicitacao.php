@@ -270,7 +270,7 @@ $reservas ??= dias_reservados_promotor($conexao, $id_promotor);
             <fieldset class="grupo-form">
             <legend>Dados do evento</legend>
             <?php if ($mostrar_tipo_festa): ?>
-                <label class="label" for="tipo_festa">Tipo de festa</label>
+                <label class="label label--tipo" for="tipo_festa">Tipo de festa</label>
                 <?php if ($tipos_festa): ?>
                     <select class="field" id="tipo_festa" name="tipo_festa" required>
                         <option value="">Selecione o tipo de festa</option>

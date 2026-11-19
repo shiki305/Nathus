@@ -226,3 +226,35 @@ if ($logado) {
     }
 })();
 </script>
+<script>
+(function () {
+    var raiz = document.documentElement;
+    if (!raiz.classList.contains('vt-topo-flutuante--ativo')) return;
+
+    function iniciar() {
+        var topo = document.querySelector('.vt-topo');
+        var hero = document.querySelector('.vt-hero');
+        if (!topo || !hero) return;
+
+        // Aparece um pouco antes do fim do hero (uma altura de topo de folga).
+        var limite = Math.max(0, hero.offsetHeight - topo.offsetHeight);
+
+        function atualizar() {
+            topo.classList.toggle('vt-topo--visivel', window.scrollY >= limite);
+        }
+
+        window.addEventListener('scroll', atualizar, { passive: true });
+        window.addEventListener('resize', function () {
+            limite = Math.max(0, hero.offsetHeight - topo.offsetHeight);
+            atualizar();
+        });
+        atualizar();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', iniciar);
+    } else {
+        iniciar();
+    }
+})();
+</script>

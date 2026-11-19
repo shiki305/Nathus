@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .sol-detalhe {
-    max-width: 1440px;
+    max-width: 1240px;
     margin-inline: auto;
     padding: clamp(16px, 2vw, 24px) clamp(16px, 3vw, 32px) 24px;
     color: #24132d;
@@ -10,8 +10,6 @@
 
 .sol-detalhe-voltar {
     margin-bottom: 12px;
-    font-size: 13px;
-    font-weight: 500;
 }
 
 .sol-detalhe-topo,
@@ -204,11 +202,16 @@
     font-weight: 600;
 }
 
+/* A foto já é o recorte do promotor: o editor do perfil grava o pacote em 16:9
+   e o upload mantém a proporção (900×507). O quadro aqui acompanha o do card
+   (4:3, o mesmo do card simples do Dashboard), para o detalhe mostrar a mesma
+   faixa que a lista — antes ele era 16:9, mais largo, e comia a altura de uma
+   foto que não fosse panorâmica. */
 .sol-detalhe-pacote-foto {
     display: block;
     width: min(100%, 480px);
     height: auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
     border-radius: 8px;
 }

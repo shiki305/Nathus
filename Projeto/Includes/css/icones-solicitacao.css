@@ -3,22 +3,25 @@
 .label--local { --icone-label: url("../../assets/local_perfilprom.svg"); }
 .label--convidados { --icone-label: url("../../assets/user_dashboard.svg"); }
 .label--mensagem { --icone-label: url("../../assets/mensagem_solicitacao.svg"); }
+.label--tipo { --icone-label: url("../../assets/tipo_festa_solicitacoes.svg"); }
 
 .label--data,
 .label--horario,
 .label--local,
 .label--convidados,
-.label--mensagem {
+.label--mensagem,
+.label--tipo {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .label--data::before,
 .label--horario::before,
 .label--local::before,
 .label--convidados::before,
-.label--mensagem::before {
+.label--mensagem::before,
+.label--tipo::before {
     content: "";
     flex: 0 0 14px;
     height: 14px;
@@ -26,7 +29,6 @@
     mask: var(--icone-label) center / contain no-repeat;
 }
 
-.label--convidados::before,
 .label--mensagem::before {
     background-color: var(--ft02-roxo-intermediario);
 }

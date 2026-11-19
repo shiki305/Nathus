@@ -16,7 +16,7 @@ body {
 }
 
 .pagina {
-    max-width: 1440px;
+    max-width: 1240px;
     margin: 0 auto;
     padding: 32px 24px 60px;
     display: grid;
@@ -94,7 +94,7 @@ body {
     color: var(--texto-link);
 }
 
-.label:is(.label--data, .label--horario, .label--local, .label--convidados, .label--mensagem) {
+.label:is(.label--data, .label--horario, .label--local, .label--convidados, .label--mensagem, .label--tipo) {
     display: flex;
 }
 
@@ -400,9 +400,27 @@ button.btn-submit {
 }
 
 .capa-lateral {
-    height: 110px;
+    /* Mesmo recorte da capa do perfil do promotor (.capa em Cliente/css/perfil.css):
+       a capa é larga e baixa, então o banner mostra a mesma faixa que o promotor vê
+       no perfil, sem revelar a parte que ele cortou. */
+    aspect-ratio: 5 / 1;
     background: #c9c7d1 center / cover no-repeat;
     overflow: hidden;
+}
+
+/* Em telas estreitas o card ocupa a largura toda, como o perfil: aí a capa volta
+   a ter a altura do perfil (.capa). */
+@media (max-width: 900px) {
+    .capa-lateral {
+        aspect-ratio: auto;
+        height: clamp(150px, 19vw, 220px);
+    }
+}
+
+@media (max-width: 700px) {
+    .capa-lateral {
+        height: 145px;
+    }
 }
 
 .capa-lateral img {
@@ -490,13 +508,6 @@ button.btn-submit {
     margin-bottom: 8px;
 }
 
-.pkg-imagem {
-    height: 168px;
-    border-radius: 8px;
-    background: #dcdce2;
-    overflow: hidden;
-}
-
 .pkg-imagem img {
     display: block;
     height: 100%;
@@ -509,12 +520,6 @@ button.btn-submit {
     padding-left: 18px;
     font-size: 13px;
     color: #4b4859;
-}
-
-.pkg-preco {
-    text-align: right;
-    color: var(--texto-escuro);
-    font-weight: 700;
 }
 
 @media (max-width: 900px) {
@@ -532,7 +537,7 @@ button.btn-submit {
 .card-pkg {
     border: 1px solid var(--borda);
     border-radius: 12px;
-    padding: 18px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
 }
@@ -545,10 +550,12 @@ button.btn-submit {
 }
 
 .pkg-imagem {
-    height: 168px;
+    /* Mesma proporção da imagem do card de pacote do perfil (328x220 dentro do
+       card de 360px): assim o recorte mostra exatamente a mesma parte da foto. */
+    aspect-ratio: 328 / 220;
     border-radius: 8px;
     background: #dcdce2;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     overflow: hidden;
 }
 

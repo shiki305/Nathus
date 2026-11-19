@@ -199,10 +199,10 @@ foreach ($solicitacoes as $solicitacao) {
                         $foto = foto_card_promotor($item, $base_url);
                         [$pacote, $preco] = ms_pacote((string) ($item['pacote_selecionado'] ?? ''));
                         $foto_pacote = midia_publica($item['pacote_imagem'] ?? '', ['pacotes'], $base_url);
-                        $itens_pacote = array_slice(array_filter(
+                        $itens_pacote = array_values(array_filter(
                             array_map('trim', preg_split('/\R/', (string) ($item['pacote_itens'] ?? ''))),
                             static fn($texto) => $texto !== ''
-                        ), 0, 3);
+                        ));
                         $evento = trim((string) ($item['nome_evento'] ?? ''));
                         $titulo_pedido = $pacote !== '' ? $pacote : ($evento !== '' ? $evento : 'Solicitação de serviço');
                         $mensagem = trim((string) ($item['observacoes'] ?? ''));
@@ -232,8 +232,11 @@ foreach ($solicitacoes as $solicitacao) {
                             <?php endif; ?>
                             <div class="sol-pacote">
                                 <p><strong><?= ms_esc($titulo_pedido) ?></strong></p>
+                                <?php if ($evento !== '' && $evento !== $titulo_pedido): ?>
+                                    <p class="sol-evento">Tipo de evento · <?= ms_esc($evento) ?></p>
+                                <?php endif; ?>
                                 <?php if ($itens_pacote): ?>
-                                    <ul>
+                                    <ul<?= count($itens_pacote) > 3 ? ' tabindex="0" role="list" aria-label="Itens inclusos no pacote (role para ver todos)"' : '' ?>>
                                         <?php foreach ($itens_pacote as $item_pacote): ?>
                                             <li><?= ms_esc($item_pacote) ?></li>
                                         <?php endforeach; ?>
@@ -250,28 +253,36 @@ foreach ($solicitacoes as $solicitacao) {
                         <dl class="sol-periodo">
                             <div><dt class="label--data">Data e horário</dt><dd><?= ms_esc(ms_periodo(trim((string) ($item['data_festa'] ?? '')), trim((string) ($item['horario'] ?? '')))) ?></dd></div>
                             <div><dt class="label--convidados">Convidados</dt><dd><?= $num_convidados > 0 ? $num_convidados : 'Não informado' ?></dd></div>
+                            <div class="sol-local"><dt>Local</dt><dd><?= ms_esc($item['local_festa'] ?: 'Não informado') ?></dd></div>
                         </dl>
-                        <details class="sol-detalhes">
-                            <summary>Detalhes da solicitação</summary>
-                            <dl>
-                                <?php if ($evento !== '' && $evento !== $titulo_pedido): ?>
-                                    <div><dt>Tipo de evento</dt><dd><?= ms_esc($evento) ?></dd></div>
-                                <?php endif; ?>
-                                <div><dt>Local</dt><dd><?= ms_esc($item['local_festa'] ?: 'Não informado') ?></dd></div>
-                                <div><dt>Enviada em</dt><dd><?= ms_esc(ms_data($item['recebida'] ?? '')) ?></dd></div>
-                                <?php if ($mensagem !== ''): ?>
-                                    <div class="sol-mensagem"><dt class="label--mensagem">Mensagem enviada</dt><dd><?= ms_esc($mensagem) ?></dd></div>
-                                <?php endif; ?>
-                            </dl>
-                        </details>
+                        <?php if ($mensagem !== ''): ?>
+                            <p class="sol-mensagem-card"><?= ms_esc($mensagem) ?></p>
+                        <?php endif; ?>
+                        <p class="sol-envio">Enviada em <?= ms_esc(ms_data($item['recebida'] ?? '')) ?></p>
                         <?php if ($prazo && $prazo['aberto']): ?>
+                            <?php $id_cancelar = (int) $item['id']; ?>
                             <div class="sol-prazo">
                                 <p><?= $prazo['limite'] ? 'Pode cancelar até ' . ms_esc(date('d/m/Y \à\s H:i', $prazo['limite'])) . '.' : 'Cancelamento disponível.' ?></p>
-                                <form method="post" onsubmit="return confirm('Cancelar esta solicitação?');">
-                                    <input type="hidden" name="acao" value="cancelar">
-                                    <input type="hidden" name="id" value="<?php echo (int) $item['id']; ?>">
-                                    <button type="submit">Cancelar solicitação</button>
-                                </form>
+                                <button type="button" class="sol-prazo-cancelar"
+                                        data-dialogo="cancelar-<?= $id_cancelar ?>" aria-haspopup="dialog">
+                                    Cancelar solicitação
+                                </button>
+                                <dialog class="sol-dialogo" id="cancelar-<?= $id_cancelar ?>"
+                                        aria-labelledby="cancelar-titulo-<?= $id_cancelar ?>"
+                                        aria-describedby="cancelar-texto-<?= $id_cancelar ?>">
+                                    <h3 id="cancelar-titulo-<?= $id_cancelar ?>">Cancelar solicitação?</h3>
+                                    <p id="cancelar-texto-<?= $id_cancelar ?>">O pedido para <?= ms_esc($nome) ?> será encerrado e o promotor não poderá mais respondê-lo. Essa ação não pode ser desfeita.</p>
+                                    <div class="sol-dialogo-acoes">
+                                        <form method="dialog">
+                                            <button type="submit" class="sol-dialogo-voltar" autofocus>Voltar</button>
+                                        </form>
+                                        <form method="post">
+                                            <input type="hidden" name="acao" value="cancelar">
+                                            <input type="hidden" name="id" value="<?= $id_cancelar ?>">
+                                            <button type="submit" class="sol-dialogo-cancelar">Cancelar solicitação</button>
+                                        </form>
+                                    </div>
+                                </dialog>
                             </div>
                         <?php elseif ($classe === 'pendente' || $classe === 'aceita'): ?>
                             <p class="sol-aviso">O prazo de 2 dias para cancelar esta solicitação encerrou.</p>
@@ -282,5 +293,15 @@ foreach ($solicitacoes as $solicitacao) {
         <?php endif; ?>
     </main>
     <?php include __DIR__ . '/conta-modal.php'; ?>
+    <script>
+        document.addEventListener('click', (evento) => {
+            const gatilho = evento.target.closest('[data-dialogo]');
+            if (!gatilho) return;
+            const dialogo = document.getElementById(gatilho.dataset.dialogo);
+            if (dialogo && typeof dialogo.showModal === 'function' && !dialogo.open) {
+                dialogo.showModal();
+            }
+        });
+    </script>
 </body>
 </html>

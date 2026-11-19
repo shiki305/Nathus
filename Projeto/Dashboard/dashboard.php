@@ -30,11 +30,6 @@ function mes_agenda(DateTimeImmutable $data): string {
     return $meses[(int) $data->format("n") - 1];
 }
 
-function data_curta_agenda(DateTimeImmutable $data, bool $incluir_ano = false): string {
-    $rotulo = $data->format("j") . " " . mes_agenda($data);
-    return $incluir_ano ? $rotulo . " " . $data->format("Y") : $rotulo;
-}
-
 function contar_solicitacoes($conexao, $sql) {
     $resultado = $conexao->query($sql);
     if (!$resultado) {
@@ -221,23 +216,13 @@ $solicitacoes = solicitacoes_pendentes($conexao, $id_promotor_logado, 3);
                                         $fim = $p["fim"];
                                         $varios_dias = $inicio->format("Y-m-d") !== $fim->format("Y-m-d");
                                         $mesmo_mes = $inicio->format("Y-m") === $fim->format("Y-m");
-                                        $exibir_ano = $inicio->format("Y") !== $agora->format("Y") || $inicio->format("Y") !== $fim->format("Y");
                                         $dia_selo = $inicio->format("j");
                                         if ($varios_dias && $mesmo_mes) $dia_selo .= "–" . $fim->format("j");
-                                        $periodo = data_curta_agenda($inicio, $exibir_ano);
-                                        if ($p["hora_inicio"] !== "") $periodo .= " às " . $p["hora_inicio"];
-                                        $termino = $varios_dias ? data_curta_agenda($fim, $exibir_ano) : "";
-                                        if ($p["hora_fim"] !== "") $termino .= ($termino !== "" ? " às " : "") . $p["hora_fim"];
-                                        $periodo = implode(" até ", array_filter([$periodo, $termino], static fn($texto) => $texto !== ""));
 
                                         $pacote = preg_split('/\R/', trim((string) $p["pacote_selecionado"]), 2)[0];
                                         $pacote = preg_replace('/\s+(?:R\$\s*[\d.,]+|Preço sob consulta)$/iu', '', $pacote);
                                         $nome_servico = $pacote ?: (trim((string) $p["nome_evento"]) ?: "Serviço");
                                         $cliente = trim((string) $p["nome_cliente"]) ?: "Cliente";
-                                        $local = "";
-                                        if (preg_match('~(?:^|,)\s*([^,/]+?)\s*[,/]\s*([A-Z]{2})\s*$~u', (string) $p["local_festa"], $localizacao)) {
-                                            $local = trim($localizacao[1]) . ", " . $localizacao[2];
-                                        }
                                     ?>
                                     <a class="proximo-item" href="../Servicos/servicos.php?id=<?php echo (int) $p["id"]; ?>">
                                         <span class="proximo-data" aria-hidden="true">
@@ -250,12 +235,6 @@ $solicitacoes = solicitacoes_pendentes($conexao, $id_promotor_logado, 3);
                                                 <?php renderizar_avatar_cliente($p["foto_cliente"], $base_url); ?>
                                                 <span><?= htmlspecialchars($cliente) ?></span>
                                             </span>
-                                            <div class="proximo-meta">
-                                                <span class="label--data"><?= htmlspecialchars($periodo) ?></span>
-                                                <?php if ($local !== ""): ?>
-                                                    <span class="label--local"><?= htmlspecialchars($local) ?></span>
-                                                <?php endif; ?>
-                                            </div>
                                         </div>
                                         <span class="proximo-seta"><img src="../assets/seta_solicitacoes.svg" alt=""></span>
                                     </a>

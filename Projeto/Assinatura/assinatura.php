@@ -131,7 +131,7 @@ $valor_atual = $plano_atual !== "" ? $planos[$plano_atual]["valor_texto"] : "—
                         <div class="resumo-dados">
                             <div class="dado">
                                 <small>Plano atual</small>
-                                <strong><?php echo htmlspecialchars($plano_nome); ?></strong>
+                                <strong class="chip-plano"><?php echo htmlspecialchars($plano_nome); ?></strong>
                             </div>
                             <div class="dado">
                                 <small>Status</small>

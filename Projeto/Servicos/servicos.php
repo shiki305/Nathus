@@ -124,7 +124,11 @@ if (!$detalhe_servico) {
          FROM solicitacoes s
          LEFT JOIN cliente c ON c.id = s.id_cliente
          WHERE s.id_promotor = ? AND s.status IN ('aceito', 'aceita')
-         ORDER BY s.recebida DESC, s.id DESC
+         ORDER BY
+             (STR_TO_DATE(SUBSTRING_INDEX(s.data_festa, ' a ', 1), '%d/%m/%Y') IS NULL) ASC,
+             (STR_TO_DATE(SUBSTRING_INDEX(s.data_festa, ' a ', 1), '%d/%m/%Y') < CURDATE()) ASC,
+             ABS(DATEDIFF(STR_TO_DATE(SUBSTRING_INDEX(s.data_festa, ' a ', 1), '%d/%m/%Y'), CURDATE())) ASC,
+             s.id ASC
          LIMIT ? OFFSET ?"
     );
     $consulta->bind_param("iii", $id_promotor_logado, $por_pagina, $offset);
@@ -163,13 +167,23 @@ if (!$detalhe_servico) {
                 <?php elseif (isset($_GET["concluido"])): ?>
                     <p class="servicos-sucesso" role="status">Serviço concluído com sucesso.</p>
                 <?php endif; ?>
-                <section aria-labelledby="servicos-aceitos">
+                <section aria-labelledby="servicos-confirmados">
                     <header class="solicitacoes-cabecalho">
-                        <h2 id="servicos-aceitos">Serviços aceitos</h2>
+                        <div class="solicitacoes-titulo">
+                            <h2 id="servicos-confirmados">Serviços confirmados</h2>
+                            <?php if ($total > 0): ?>
+                                <span class="solicitacoes-contagem" aria-label="<?= $total === 1 ? '1 serviço confirmado' : $total . ' serviços confirmados' ?>"><?= $total ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <p class="solicitacoes-descricao">Seus compromissos, com o próximo evento no topo.</p>
                     </header>
                     <div class="lista-cards-solicitacao">
                         <?php if (!$servicos): ?>
-                            <p class="solicitacoes-vazio">Nenhum serviço aceito no momento.</p>
+                            <div class="lista-vazia">
+                                <p class="lista-vazia-titulo">Nenhum serviço confirmado</p>
+                                <p class="lista-vazia-texto">Aceite uma solicitação para o evento entrar na sua agenda.</p>
+                                <a class="lista-vazia-acao" href="../Solicitacoes/solicitacoes.php">Ver solicitações pendentes</a>
+                            </div>
                         <?php else: ?>
                             <?php foreach ($servicos as $solicitacao): ?>
                                 <?php include __DIR__ . "/../Includes/card-solicitacao.php"; ?>

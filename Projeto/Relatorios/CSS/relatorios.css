@@ -4,7 +4,7 @@
     flex-direction: column;
     gap: 18px;
     width: 100%;
-    max-width: 1480px;
+    max-width: 1280px;
     margin-inline: auto;
     box-sizing: border-box;
 }

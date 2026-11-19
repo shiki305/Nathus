@@ -1,7 +1,3 @@
-.card-pendencia--servico .card-pendencia-recebida {
-    line-height: calc(13px * 1.45);
-}
-
 .card-pendencia--servico .card-pendencia-data strong {
     line-height: 1.25;
 }
@@ -9,18 +5,7 @@
 @media (min-width: 761px) {
     .pagina-servicos .sol-detalhe,
     .pagina-servicos .solicitacoes-pagina {
-        padding-inline: 28px;
-    }
-
-    .card-pendencia--servico .card-pendencia-acoes {
-        display: flex;
-        flex-direction: column;
-        align-self: stretch;
-        align-items: flex-end;
-    }
-
-    .card-pendencia--servico .card-pendencia-detalhes {
-        margin-block: auto;
+        padding-inline: 24px;
     }
 }
 

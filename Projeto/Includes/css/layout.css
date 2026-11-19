@@ -122,14 +122,24 @@ body {
     stroke-linejoin: round;
 }
 
+/* Item selecionado: fundo branco, texto roxo escuro e ícone em roxo médio
+   sobre a pastilha lilás. O peso sobe para 600 (mais forte, sem ser bold). */
 .item-navegacao.ativo {
-    background: #f1ecfa;
-    color: #2e184f;
-    font-weight: 700;
+    background: #fff;
+    color: #2a194e;
+    font-weight: 600;
 }
 
 .item-navegacao.ativo .icone-navegacao {
-    background: #dfd2f1;
+    background: #e3d8fa;
+}
+
+.item-navegacao.ativo .icone-navegacao svg {
+    stroke: #4a2b9e;
+    /* Pouco acima do 1.75 do estado normal: o item ativo já se distingue pelo
+       fundo branco, pela pastilha lilás e pelo texto em 600. Com 2.5 o ícone
+       engordava e destoava dos demais. */
+    stroke-width: 2;
 }
 
 .selo-lateral {
@@ -151,8 +161,13 @@ body {
 }
 
 @media (hover: hover) {
-    .item-navegacao:hover:not(.ativo) {
-        background: #ffffff12;
+    .item-navegacao:hover:not(.ativo):not(.sair) {
+        background: rgba(255, 255, 255, .14);
+        color: #fff;
+    }
+
+    .item-navegacao:hover:not(.ativo):not(.sair) .icone-navegacao {
+        background: rgba(255, 255, 255, .18);
     }
 
     .barra-lateral .sair:hover {
