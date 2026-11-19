@@ -5,7 +5,8 @@
 -- Ao importar, APAGA E RECRIA as 32 contas demo, pacotes, galerias e solicitacoes
 -- associadas. Alteracoes dessas contas serao perdidas. Outras contas sao preservadas.
 -- Pode reimportar sem duplicar. Os IDs das contas e perfis serao novos.
--- Imagens: uploads/perfil-promotor, banner, pacotes e galeria, slugs demo-<usuario>-*.
+-- Imagens: uploads/perfil-promotor, perfil-cliente, banner, pacotes e galeria,
+-- slugs demo-<usuario>-*.
 -- Importar depois de Banco/nathus.sql.
 SET NAMES utf8mb4;
 USE nathus;
@@ -600,11 +601,11 @@ WHERE @p IS NOT NULL AND NOT EXISTS (SELECT 1 FROM promotor_galeria WHERE id_pro
 -- ---------------------------------------------------------------------------
 -- 2) Clientes (sem registro de promotor)
 -- ---------------------------------------------------------------------------
-INSERT INTO cliente (usuario, nome, senha, email, telefone, cpf, tipo_conta)
-SELECT 'cliente1', 'Cliente Demo 1', '$2y$10$LXMb5rUlR2MOS2dv8xXJj.Af9QaP82Jjz.DAmskuwieEAvJBWViwK', 'cliente1@nathus.com', '', '', 'cliente'
+INSERT INTO cliente (usuario, nome, senha, email, telefone, cpf, foto, tipo_conta)
+SELECT 'cliente1', 'Mariana Alves', '$2y$10$LXMb5rUlR2MOS2dv8xXJj.Af9QaP82Jjz.DAmskuwieEAvJBWViwK', 'cliente1@nathus.com', '(21) 98812-4477', '52998224725', 'demo-cliente1-perfil.jpg', 'cliente'
 WHERE NOT EXISTS (SELECT 1 FROM cliente WHERE email='cliente1@nathus.com');
-INSERT INTO cliente (usuario, nome, senha, email, telefone, cpf, tipo_conta)
-SELECT 'cliente2', 'Cliente Demo 2', '$2y$10$LXMb5rUlR2MOS2dv8xXJj.Af9QaP82Jjz.DAmskuwieEAvJBWViwK', 'cliente2@nathus.com', '', '', 'cliente'
+INSERT INTO cliente (usuario, nome, senha, email, telefone, cpf, foto, tipo_conta)
+SELECT 'cliente2', 'Rafael Nogueira', '$2y$10$LXMb5rUlR2MOS2dv8xXJj.Af9QaP82Jjz.DAmskuwieEAvJBWViwK', 'cliente2@nathus.com', '(21) 99640-1188', '11144477735', 'demo-cliente2-perfil.jpg', 'cliente'
 WHERE NOT EXISTS (SELECT 1 FROM cliente WHERE email='cliente2@nathus.com');
 
 -- ---------------------------------------------------------------------------
