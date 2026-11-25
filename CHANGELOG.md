@@ -1,5 +1,20 @@
     # CHANGELOG
 
+## 2026-11-25 - Limpeza de assets sem referência (~16 MB)
+
+- Removidos 34 arquivos de `Projeto/assets/` com 50 KB ou mais que nenhum PHP/CSS/JS/SQL
+  cita — nem pelo nome, nem pelo nome sem extensão — e que não estão na lista de
+  `reserva_visual_promotor()`. Ícones e imagens menores que 50 KB foram mantidos de propósito.
+- `assets/section2.svg` (3,6 MB) era um PNG em base64 dentro de um SVG, sem uso. Saíram com
+  ele: `section2.png`, `HomeHeroq.png`, `login-login.png`, `garotafelizlandingpagecomfiltro.png`,
+  `garotafelizlandingpage.jpg`, `0909.png`, `landing-0909.png`, `landing-sec01-img.png` (cópia
+  do `sec01-img.png`, que é o usado), `landing-hero.png` (cópia do `Hero.png`, que é o usado) e
+  `banner-padrao-promotor.png` (o fallback real é `banner-padrao-nathus.png`).
+- Em `assets/home`, saíram fotos fora da lista de reserva: `o16`–`o21`, `cardapio16`–`cardapio22`
+  (incluindo o `carddapio17`), `cardapio33`, `chantor`, `domareli`, `zephe`, `lunavel`,
+  `aurielle` e `noarielle`. Também `perfil-imagem.png`, `perfil-video.png` e `perfil-avatar.png`.
+- O projeto caiu de ~75 MB para ~59 MB, sem mudança visual no site.
+
 ## 2026-11-25 - Limpeza de imagens não usadas (~31 MB)
 
 - Removidos `Projeto/assets/home/Home-espaço.png` (14,0 MB) e
