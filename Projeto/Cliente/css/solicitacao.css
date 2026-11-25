@@ -111,8 +111,9 @@ body {
 }
 
 .field:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--focus-sombra);
+    outline: 3px solid var(--ft02-amarelo);
+    outline-offset: -3px;
+    box-shadow: none;
 }
 
 .campo-data {

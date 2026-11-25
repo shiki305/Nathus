@@ -147,7 +147,8 @@ $registro = strtotime((string) ($detalhe_servico ? ($dados["respondida_em"] ?? "
                 <?php elseif (in_array($estado, ["pendente", "aceita", "recusada"], true)): ?>
                     <form method="post" class="sol-detalhe-acoes">
                         <?php if ($estado === "pendente"): ?>
-                            <button class="btn-responder btn-responder--recusar" type="submit" name="acao" value="recusar">Recusar</button>
+                            <button class="btn-responder btn-responder--recusar" type="button" id="abrir-recusa"
+                                aria-haspopup="dialog" aria-controls="confirmar-recusa">Recusar</button>
                             <button class="btn-responder btn-responder--aceitar" type="submit" name="acao" value="aceitar">Aceitar solicitação</button>
                         <?php else: ?>
                             <button class="btn-responder" type="submit" name="acao" value="reverter">Voltar para pendente</button>
@@ -156,6 +157,25 @@ $registro = strtotime((string) ($detalhe_servico ? ($dados["respondida_em"] ?? "
                             <?php endif; ?>
                         <?php endif; ?>
                     </form>
+                    <?php if ($estado === "pendente"): ?>
+                        <dialog class="sol-dialogo" id="confirmar-recusa" aria-labelledby="recusa-titulo" aria-describedby="recusa-texto">
+                            <h3 id="recusa-titulo">Recusar solicitação?</h3>
+                            <p id="recusa-texto">O cliente será avisado de que você não vai atender este pedido. Se precisar, ainda pode voltar a solicitação para pendente depois.</p>
+                            <div class="sol-dialogo-acoes">
+                                <form method="dialog">
+                                    <button type="submit" class="sol-dialogo-voltar" autofocus>Voltar</button>
+                                </form>
+                                <form method="post">
+                                    <button type="submit" class="sol-dialogo-recusar" name="acao" value="recusar">Recusar solicitação</button>
+                                </form>
+                            </div>
+                        </dialog>
+                        <script>
+                            document.getElementById("abrir-recusa").addEventListener("click", () => {
+                                document.getElementById("confirmar-recusa").showModal();
+                            });
+                        </script>
+                    <?php endif; ?>
                 <?php endif; ?>
             </section>
         </div>

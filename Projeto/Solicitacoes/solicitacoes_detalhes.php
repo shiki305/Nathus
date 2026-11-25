@@ -86,8 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao'])) {
             header("Location: solicitacoes_detalhes.php?id=" . $id_solicitacao);
             exit;
         }
-        
-        header("Location: solicitacoes_detalhes.php?id=" . $id_solicitacao, true, 303);
+
+        // Ao aceitar, o serviço já existe com o mesmo id: leva direto para ele.
+        $destino = $novo_status === 'aceito'
+            ? "../Servicos/servicos.php?id=" . $id_solicitacao
+            : "solicitacoes_detalhes.php?id=" . $id_solicitacao;
+        header("Location: " . $destino, true, 303);
         exit;
     }
 }

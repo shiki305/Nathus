@@ -823,10 +823,6 @@ button.vt-usuario {
     gap: 8px;
 }
 
-.sol-periodo .label--data::before {
-    background-color: var(--ft02-roxo-intermediario);
-}
-
 .sol-card dd {
     color: #24132d;
     font-size: 14px;

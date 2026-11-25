@@ -282,7 +282,7 @@ $reservas ??= dias_reservados_promotor($conexao, $id_promotor);
                     </select>
                 <?php else: ?>
                     <input class="field" id="tipo_festa" name="tipo_festa" type="text" maxlength="100"
-                        placeholder="Ex.: Aniversário" value="<?= htmlspecialchars($tipo) ?>" required>
+                        placeholder="Ex.: Casamento" value="<?= htmlspecialchars($tipo) ?>" required>
                 <?php endif; ?>
             <?php endif; ?>
 

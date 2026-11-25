@@ -247,6 +247,7 @@ a {
     align-content: start;
     gap: 8px;
     min-block-size: calc(var(--proximo-item-altura) * 3);
+    padding-top: 24px;
 }
 
 .proximo-dados {

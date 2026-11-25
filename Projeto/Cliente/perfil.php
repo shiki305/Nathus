@@ -237,7 +237,7 @@ $vt_voltar = "../Cliente/perfil.php?id=" . (int) $id_promotor;
 <?php if ($avaliado): ?>
 <div class="fundo-modal aberto" id="fundo-avaliado">
     <div class="modal-sucesso" role="dialog">
-        <img src="<?php echo $base_url; ?>assets/check-dourado.png" alt="">
+        <img src="<?php echo $base_url; ?>assets/check-dourado.svg" alt="">
         <p>Avaliação enviada. Obrigado!</p>
     </div>
 </div>

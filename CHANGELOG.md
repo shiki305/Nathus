@@ -1,5 +1,27 @@
     # CHANGELOG
 
+## 2026-11-25 - Ajustes pontuais no dashboard, nas solicitações e nas especialidades
+
+- O vazio da coluna "Solicitações em 2026" ficou alinhado com o "Nenhum serviço agendado" da
+  coluna "Próximos Serviços": `.proximos-lista` ganhou `padding-top: 24px`, o mesmo respiro que
+  `.painel-corpo` já dava ao gráfico. Antes os dois textos começavam com 24px de diferença.
+- O foco dos campos da solicitação do cliente deixou o anel lilás e passou a usar o amarelo da
+  marca (`--ft02-amarelo`, #f5b600) com 3px e `outline-offset: -3px`, igual ao login.
+- O modal "Avaliação enviada. Obrigado!" trocou o `check-dourado.png` (22×22 exibido em 42×42,
+  que borrava) por `assets/check-dourado.svg`, no mesmo dourado com check branco.
+- As especialidades **Aniversário** e **Corporativo** saíram de `Includes/tipos-festa.php`, das
+  regras de ícone em `Includes/css/global.css` e dos assets `aniversario.svg` e
+  `corporativo.svg`. O placeholder "Ex.: Aniversário" do formulário virou "Ex.: Casamento".
+  As descrições demo que citavam "aniversários e eventos corporativos" foram reescritas para
+  "formaturas e festas de 15 anos" (SQL e banco).
+- Em "Minhas solicitações", o ícone de data e horário voltou ao cinza do rótulo (`#6d6784`):
+  saiu a regra `.sol-periodo .label--data::before` que forçava o roxo.
+- O botão **Recusar** da solicitação agora pede confirmação em um `<dialog>` nativo com
+  "Recusar solicitação?", "Voltar" (foco inicial) e "Recusar solicitação" em vermelho. É o
+  mesmo padrão do cancelamento do cliente; Esc fecha.
+- Ao **aceitar** uma solicitação, o promotor vai direto para a página do serviço recém-criado
+  (`Servicos/servicos.php?id=...`), em vez de voltar para o detalhe da solicitação.
+
 ## 2026-11-18 - Cards de solicitação x serviço e página do cliente
 
 - O card compartilhado (`Includes/card-solicitacao.php`) agora tem duas leituras:

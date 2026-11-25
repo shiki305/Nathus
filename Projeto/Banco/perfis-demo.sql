@@ -74,7 +74,7 @@ SELECT 'buffet1', 'Rosana Almeida', '$2y$10$LXMb5rUlR2MOS2dv8xXJj.Af9QaP82Jjz.DA
 WHERE NOT EXISTS (SELECT 1 FROM cliente WHERE email='buffet1@nathus.com');
 SET @c = (SELECT id FROM cliente WHERE email='buffet1@nathus.com' AND tipo_conta='promotor' LIMIT 1);
 INSERT INTO promotor (id_cliente, nome_fantasia, cnpj, plano, metodo_pagamento, status_plano, foto_perfil, descricao, banner, frase_destaque, cidade, estado, capacidade_maxima, nota_media, total_avaliacoes)
-SELECT @c, 'Sabor & Arte Buffet', '12.345.678/0001-01', 'anual', 'pix', 'ativo', 'demo-buffet1-perfil.jpg', 'Cozinha autoral comandada por uma equipe de chefs formados em hotelaria. Trabalhamos com ingredientes frescos de produtores da região e montamos o cardápio junto com o cliente. Atendemos casamentos, aniversários e eventos corporativos em todo o Grande Rio.', 'demo-buffet1-banner.jpg', 'Gastronomia autoral para festas inesquecíveis', 'Rio de Janeiro', 'RJ', 180, 4.90, 127
+SELECT @c, 'Sabor & Arte Buffet', '12.345.678/0001-01', 'anual', 'pix', 'ativo', 'demo-buffet1-perfil.jpg', 'Cozinha autoral comandada por uma equipe de chefs formados em hotelaria. Trabalhamos com ingredientes frescos de produtores da região e montamos o cardápio junto com o cliente. Atendemos casamentos, formaturas e festas de 15 anos em todo o Grande Rio.', 'demo-buffet1-banner.jpg', 'Gastronomia autoral para festas inesquecíveis', 'Rio de Janeiro', 'RJ', 180, 4.90, 127
 WHERE @c IS NOT NULL AND NOT EXISTS (SELECT 1 FROM promotor WHERE id_cliente=@c);
 SET @p = (SELECT id FROM promotor WHERE id_cliente=@c LIMIT 1);
 INSERT INTO promotor_campo (id_promotor, campo)
@@ -357,7 +357,7 @@ SELECT 'local4', 'Bianca Rocha', '$2y$10$LXMb5rUlR2MOS2dv8xXJj.Af9QaP82Jjz.DAmsk
 WHERE NOT EXISTS (SELECT 1 FROM cliente WHERE email='local4@nathus.com');
 SET @c = (SELECT id FROM cliente WHERE email='local4@nathus.com' AND tipo_conta='promotor' LIMIT 1);
 INSERT INTO promotor (id_cliente, nome_fantasia, cnpj, plano, metodo_pagamento, status_plano, foto_perfil, descricao, banner, frase_destaque, cidade, estado, capacidade_maxima, nota_media, total_avaliacoes, espaco_logradouro, espaco_numero, espaco_bairro, espaco_complemento)
-SELECT @c, 'Terraço Maré', '12.345.678/0001-09', 'mensal', 'pix', 'ativo', 'demo-local4-perfil.jpg', 'Terraço na orla da Barra com vista aberta para o mar e pôr do sol garantido. Ambiente climatizado com paredes de vidro, varanda externa e bar central. Ideal para festas de 15 anos, casamentos intimistas e eventos corporativos.', 'demo-local4-banner.jpg', 'Vista para o mar e pé na areia', 'Rio de Janeiro', 'RJ', 180, 4.70, 39, 'Avenida Horizonte da Maré', '205', 'Barra da Tijuca', 'Terraço'
+SELECT @c, 'Terraço Maré', '12.345.678/0001-09', 'mensal', 'pix', 'ativo', 'demo-local4-perfil.jpg', 'Terraço na orla da Barra com vista aberta para o mar e pôr do sol garantido. Ambiente climatizado com paredes de vidro, varanda externa e bar central. Ideal para festas de 15 anos, casamentos intimistas e formaturas.', 'demo-local4-banner.jpg', 'Vista para o mar e pé na areia', 'Rio de Janeiro', 'RJ', 180, 4.70, 39, 'Avenida Horizonte da Maré', '205', 'Barra da Tijuca', 'Terraço'
 WHERE @c IS NOT NULL AND NOT EXISTS (SELECT 1 FROM promotor WHERE id_cliente=@c);
 SET @p = (SELECT id FROM promotor WHERE id_cliente=@c LIMIT 1);
 INSERT INTO promotor_campo (id_promotor, campo)
@@ -620,7 +620,7 @@ WHERE NOT EXISTS (SELECT 1 FROM cliente WHERE email='buffet6@nathus.com');
 SET @c = (SELECT id FROM cliente WHERE email='buffet6@nathus.com' AND tipo_conta='promotor' LIMIT 1);
 
 INSERT INTO promotor (id_cliente, nome_fantasia, cnpj, plano, metodo_pagamento, status_plano, foto_perfil, descricao, banner, frase_destaque, cidade, estado, capacidade_maxima, nota_media, total_avaliacoes)
-SELECT @c, 'Celebra Buffet', '12.345.678/0002-06', 'anual', 'pix', 'ativo', 'demo-buffet6-perfil.jpg', 'Cozinha autoral comandada por uma equipe de chefs formados em hotelaria. Trabalhamos com ingredientes frescos de produtores da região e montamos o cardápio junto com o cliente. Atendemos casamentos, aniversários e eventos corporativos em todo o Grande Rio.', 'demo-buffet6-banner.jpg', 'Gastronomia autoral para festas inesquecíveis', 'Rio de Janeiro', 'RJ', 180, 4.90, 127
+SELECT @c, 'Celebra Buffet', '12.345.678/0002-06', 'anual', 'pix', 'ativo', 'demo-buffet6-perfil.jpg', 'Cozinha autoral comandada por uma equipe de chefs formados em hotelaria. Trabalhamos com ingredientes frescos de produtores da região e montamos o cardápio junto com o cliente. Atendemos casamentos, formaturas e festas de 15 anos em todo o Grande Rio.', 'demo-buffet6-banner.jpg', 'Gastronomia autoral para festas inesquecíveis', 'Rio de Janeiro', 'RJ', 180, 4.90, 127
 WHERE @c IS NOT NULL AND NOT EXISTS (SELECT 1 FROM promotor WHERE id_cliente=@c);
 
 SET @p = (SELECT id FROM promotor WHERE id_cliente=@c LIMIT 1);
@@ -1004,7 +1004,7 @@ WHERE NOT EXISTS (SELECT 1 FROM cliente WHERE email='local9@nathus.com');
 SET @c = (SELECT id FROM cliente WHERE email='local9@nathus.com' AND tipo_conta='promotor' LIMIT 1);
 
 INSERT INTO promotor (id_cliente, nome_fantasia, cnpj, plano, metodo_pagamento, status_plano, foto_perfil, descricao, banner, frase_destaque, cidade, estado, capacidade_maxima, nota_media, total_avaliacoes, espaco_logradouro, espaco_numero, espaco_bairro, espaco_complemento)
-SELECT @c, 'Quinta dos Ipês', '12.345.678/0003-09', 'mensal', 'pix', 'ativo', 'demo-local9-perfil.jpg', 'Terraço na orla da Barra com vista aberta para o mar e pôr do sol garantido. Ambiente climatizado com paredes de vidro, varanda externa e bar central. Ideal para festas de 15 anos, casamentos intimistas e eventos corporativos.', 'demo-local9-banner.jpg', 'Vista para o mar e pé na areia', 'Rio de Janeiro', 'RJ', 180, 4.70, 39, 'Avenida dos Ipês da Orla', '223', 'Barra da Tijuca', 'Pavilhão dos Ipês'
+SELECT @c, 'Quinta dos Ipês', '12.345.678/0003-09', 'mensal', 'pix', 'ativo', 'demo-local9-perfil.jpg', 'Terraço na orla da Barra com vista aberta para o mar e pôr do sol garantido. Ambiente climatizado com paredes de vidro, varanda externa e bar central. Ideal para festas de 15 anos, casamentos intimistas e formaturas.', 'demo-local9-banner.jpg', 'Vista para o mar e pé na areia', 'Rio de Janeiro', 'RJ', 180, 4.70, 39, 'Avenida dos Ipês da Orla', '223', 'Barra da Tijuca', 'Pavilhão dos Ipês'
 WHERE @c IS NOT NULL AND NOT EXISTS (SELECT 1 FROM promotor WHERE id_cliente=@c);
 
 SET @p = (SELECT id FROM promotor WHERE id_cliente=@c LIMIT 1);

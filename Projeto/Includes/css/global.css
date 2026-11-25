@@ -164,8 +164,6 @@ html {
 .icone-especialidade[data-icone="15_anos.png"] { --icone: url("../../assets/15_anos.png"); }
 .icone-especialidade[data-icone="casamento.png"] { --icone: url("../../assets/casamento.png"); }
 .icone-especialidade[data-icone="formatura.png"] { --icone: url("../../assets/formatura.png"); }
-.icone-especialidade[data-icone="aniversario.svg"] { --icone: url("../../assets/aniversario.svg"); }
-.icone-especialidade[data-icone="corporativo.svg"] { --icone: url("../../assets/corporativo.svg"); }
 
 /* Conta compartilhada: referência visual do dashboard do promotor. */
 .conta-perfil { position: relative; min-width: 0; font-family: "Poppins", sans-serif; }
