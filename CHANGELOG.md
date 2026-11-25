@@ -1,5 +1,13 @@
     # CHANGELOG
 
+## 2026-11-25 - Limpeza de imagens não usadas (~31 MB)
+
+- Removidos `Projeto/assets/home/Home-espaço.png` (14,0 MB) e
+  `Projeto/assets/home/Home-buffet.png` (7,1 MB): nenhum arquivo do projeto os citava.
+- Removida a pasta `Projeto/Banco/imagens Cadastro/` (10,0 MB, 38 imagens em PNG/JPG/HEIC):
+  eram originais de cadastro, sem referência no código nem no `Banco/perfis-demo.sql`.
+- O repositório caiu de ~106 MB para ~75 MB sem nenhuma mudança visual no site.
+
 ## 2026-11-25 - Ajustes pontuais no dashboard, nas solicitações e nas especialidades
 
 - O vazio da coluna "Solicitações em 2026" ficou alinhado com o "Nenhum serviço agendado" da
